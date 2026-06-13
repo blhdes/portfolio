@@ -217,6 +217,16 @@ a { color: inherit; text-decoration: none; }
   border-radius: 10px;
 }
 
+/* Device-mockup screenshots: a transparent PNG of a phone with a baked-in
+   shadow. No frame (the rendered phone is its own frame) and contain so
+   the whole device + shadow shows without cropping. */
+.app-shot--device {
+  aspect-ratio: 560 / 1213;
+  object-fit: contain;
+  border: none;
+  border-radius: 0;
+}
+
 .app-name {
   font-size: 1.375rem;
   font-weight: 600;

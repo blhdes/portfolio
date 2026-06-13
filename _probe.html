@@ -10,7 +10,7 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://api.fontshare.com">
   <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=10">
+  <link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body>
 
@@ -43,8 +43,8 @@
       <div class="app-grid">
         <article class="app-card">
           <div class="app-shots">
-            <img class="app-shot" src="/screens/culla/gallery.webp" width="720" height="1564" loading="lazy" alt="Culla — a colour-tagged photo gallery">
-            <img class="app-shot" src="/screens/culla/date-picker.webp" width="720" height="1564" loading="lazy" alt="Culla — start culling photos from any date">
+            <img class="app-shot" src="/screens/culla-gallery.webp" width="720" height="1564" loading="lazy" alt="Culla — a colour-tagged photo gallery">
+            <img class="app-shot" src="/screens/culla-date-picker.webp" width="720" height="1564" loading="lazy" alt="Culla — start culling photos from any date">
           </div>
           <div class="app-meta">
             <h3 class="app-name">Culla</h3>
@@ -55,7 +55,7 @@
 
         <article class="app-card">
           <div class="app-shots">
-            <img class="app-shot app-shot--device" src="/screens/cullamusic/home.webp" width="560" height="1213" loading="lazy" alt="CullaMusic — sort your music library into playlists">
+            <div class="ph ph-phone"><span>screens<br>soon</span></div>
             <div class="ph ph-phone"><span>screens<br>soon</span></div>
           </div>
           <div class="app-meta">
@@ -271,5 +271,16 @@
   </footer>
 
   <script src="js/main.js"></script>
+<script>
+function probe(){
+ const out=[];
+ const log=(sel)=>document.querySelectorAll(sel).forEach((el,i)=>{
+  const r=el.getBoundingClientRect();out.push(sel+'#'+i+'=w'+Math.round(r.width)+'h'+Math.round(r.height));});
+ ['.app-card','.app-shot','.ph-phone'].forEach(log);
+ let pre=document.getElementById('PROBE')||document.createElement('pre');
+ pre.id='PROBE';pre.textContent='PB|'+out.join('|')+'|BP';document.body.prepend(pre);
+}
+window.addEventListener('load',()=>setTimeout(probe,800));
+</script>
 </body>
 </html>
