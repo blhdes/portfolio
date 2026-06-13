@@ -309,8 +309,8 @@ a { color: inherit; text-decoration: none; }
    An empty .cv-mark stays invisible but reserves the column, so rows
    line up even before every logo is in. */
 .cv-logo,
-.cv-monogram,
-.cv-mark {
+.cv-mark,
+.cv-self {
   flex-shrink: 0;
   width: 1.625rem;
   height: 1.625rem;
@@ -326,15 +326,13 @@ a { color: inherit; text-decoration: none; }
           mask-repeat: no-repeat;
 }
 
-/* Stand-in mark for the independent role: initials in the ink tone. */
-.cv-monogram {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--ink);
+/* Personal mark for the freelance / own-practice roles: the site's
+   accent icon (rounded square), in the accent colour rather than ink,
+   so they read as "Ale" rather than a company. Flips with the accent
+   in dark mode, like the favicon. */
+.cv-self {
+  background-color: var(--accent);
+  border-radius: 19%;
 }
 
 .cv-main { flex: 1; min-width: 0; }
