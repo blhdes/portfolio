@@ -200,6 +200,18 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 1.5rem;
 }
 
+/* Real App Store screenshots: framed so the white screenshot background
+   reads as an intentional shot in both light and dark mode. The
+   aspect-ratio matches the source (1320x2868) so nothing is cropped. */
+.app-shot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1320 / 2868;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
 .app-name {
   font-size: 1.375rem;
   font-weight: 600;
