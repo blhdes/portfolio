@@ -13,6 +13,19 @@
   --font: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --pad: clamp(1.25rem, 5vw, 4rem);
   --section-gap: clamp(5rem, 12vh, 8rem);
+  color-scheme: light dark;
+}
+
+/* Dark version: follows the visitor's system setting. Same warm
+   family as the light theme, the screening room instead of the page. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #181613;
+    --ink: #ece9e2;
+    --muted: #8f897e;
+    --line: #312e28;
+    --accent: #e8553d;
+  }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
