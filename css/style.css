@@ -186,16 +186,20 @@ a { color: inherit; text-decoration: none; }
 
 /* ······ apps ······ */
 
+/* minmax(0, 1fr) tracks (instead of plain 1fr, whose implicit auto
+   minimum is min-content) let the columns shrink below the 720px
+   intrinsic width of the screenshots. Without this the images force
+   both this grid and the inner .app-shots grid to overflow. */
 .app-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(2rem, 5vw, 4rem);
 }
-@media (max-width: 760px) { .app-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .app-grid { grid-template-columns: minmax(0, 1fr); } }
 
 .app-shots {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
@@ -206,6 +210,7 @@ a { color: inherit; text-decoration: none; }
 .app-shot {
   display: block;
   width: 100%;
+  height: auto; /* override the height="1564" HTML attribute, or it pins the height and aspect-ratio is ignored */
   aspect-ratio: 1320 / 2868;
   object-fit: cover;
   border: 1px solid var(--line);
