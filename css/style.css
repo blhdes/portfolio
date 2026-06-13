@@ -254,6 +254,25 @@ a { color: inherit; text-decoration: none; }
 
 .project-pending .project-title { color: var(--muted); }
 
+/* BLHADES wordmark as the project title: the same ink-mask trick the CV
+   logos use, but sized as a wordmark — fixed height, width follows the
+   logo's own proportions. Flips light/dark with --ink. Needs a
+   transparent asset; its alpha channel defines the shape. mask-size:
+   contain means a rough aspect-ratio never distorts the logo — it only
+   adds harmless transparent space on the right. */
+.project-logo {
+  display: block;
+  height: 1.5rem;
+  aspect-ratio: 1007 / 160;
+  background-color: var(--ink);
+  -webkit-mask-position: left center;
+          mask-position: left center;
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+}
+
 @media (max-width: 600px) {
   .project { flex-direction: column; gap: 0.75rem; }
   .project-side { align-items: flex-start; text-align: left; }
