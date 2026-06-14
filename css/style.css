@@ -289,7 +289,8 @@ a { color: inherit; text-decoration: none; }
    adds harmless transparent space on the right. */
 .project-logo {
   display: block;
-  height: 0.875rem;
+  /* per-logo height; defaults to match the text titles' optical size */
+  height: var(--logo-h, 0.875rem);
   /* nudge right ~2px to fake the left side-bearing that the text titles'
      font glyphs have, so the wordmark lines up with them */
   margin-left: 2px;
