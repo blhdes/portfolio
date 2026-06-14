@@ -237,28 +237,6 @@ a { color: inherit; text-decoration: none; }
 
 /* ······ photography ······ */
 
-/* Lead image introducing the section: a single framed print. The white
-   background reads as an intentional shot in both themes, same trick as
-   .app-shot. Capped width so the camera stays a tasteful detail, not a
-   billboard, above the grid. */
-.photo-lead {
-  max-width: 22rem;
-  margin-bottom: 2.5rem;
-}
-.photo-lead-img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-}
-.photo-lead-cap {
-  margin-top: 0.6rem;
-  font-size: 0.8125rem;
-  color: var(--muted);
-}
-
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -346,6 +324,24 @@ a { color: inherit; text-decoration: none; }
 
 .about-text { max-width: 58ch; }
 .about-text p + p { margin-top: 1.25rem; }
+
+/* Small editorial accent floated beside the photography paragraph — a
+   margin illustration, not a gallery tile. Framed like .app-shot so the
+   white background reads as a print in both themes. */
+.about-aside {
+  float: right;
+  width: 8rem;
+  margin: 0.3rem 0 0.8rem 1.5rem;
+}
+.about-aside img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+@media (max-width: 760px) { .about-aside { width: 6.5rem; margin-left: 1rem; } }
 
 .about-closing {
   font-weight: 500;
