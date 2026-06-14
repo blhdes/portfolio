@@ -227,17 +227,6 @@ a { color: inherit; text-decoration: none; }
   border-radius: 0;
 }
 
-/* Flat screen capture (no device frame): float it with a soft drop-shadow
-   that follows its own rounded corners, so it reads as an intentional
-   screenshot next to the framed mockups. */
-.app-shot--screen {
-  aspect-ratio: 560 / 1213;
-  object-fit: contain;
-  border: none;
-  border-radius: 0;
-  filter: drop-shadow(0 10px 20px rgba(26, 24, 21, 0.18));
-}
-
 .app-name {
   font-size: 1.375rem;
   font-weight: 600;
