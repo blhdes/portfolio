@@ -237,6 +237,28 @@ a { color: inherit; text-decoration: none; }
 
 /* ······ photography ······ */
 
+/* Lead image introducing the section: a single framed print. The white
+   background reads as an intentional shot in both themes, same trick as
+   .app-shot. Capped width so the camera stays a tasteful detail, not a
+   billboard, above the grid. */
+.photo-lead {
+  max-width: 22rem;
+  margin-bottom: 2.5rem;
+}
+.photo-lead-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.photo-lead-cap {
+  margin-top: 0.6rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -395,6 +417,7 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.3;
 }
 .cv-org { font-weight: 500; margin-top: 0.15rem; }
+.cv-org-note { color: var(--muted); font-weight: 400; }
 .cv-note { color: var(--muted); margin-top: 0.4rem; max-width: 52ch; }
 
 .cv-year {
