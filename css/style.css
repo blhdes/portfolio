@@ -293,7 +293,8 @@ a { color: inherit; text-decoration: none; }
   /* nudge right ~2px to fake the left side-bearing that the text titles'
      font glyphs have, so the wordmark lines up with them */
   margin-left: 2px;
-  aspect-ratio: 1007 / 160;
+  /* per-logo aspect ratio; defaults to the BLHADES wordmark */
+  aspect-ratio: var(--logo-ar, 1007 / 160);
   background-color: var(--ink);
   -webkit-mask-position: left center;
           mask-position: left center;
