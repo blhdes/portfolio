@@ -172,6 +172,20 @@ a { color: inherit; text-decoration: none; }
 .r-43 { aspect-ratio: 4 / 3; }
 .r-34 { aspect-ratio: 3 / 4; }
 .r-11 { aspect-ratio: 1 / 1; }
+.r-21 { aspect-ratio: 2 / 1; }
+
+/* Real photos sit in the same grid as the placeholders: fill the cell,
+   crop with object-fit so the declared ratio always holds. */
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+/* A landscape spread reads better spanning two columns (full width on the
+   two-column mobile layout). */
+.photo-wide { grid-column: span 2; }
 
 /* ······ links ······ */
 
