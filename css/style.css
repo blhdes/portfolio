@@ -325,17 +325,12 @@ a { color: inherit; text-decoration: none; }
 .about-text { max-width: 58ch; }
 .about-text p + p { margin-top: 1.25rem; }
 
-/* Small editorial accent floated beside the photography paragraph — a
-   margin illustration, not a gallery tile. No frame: multiply blends the
-   white background straight into the paper so the camera just sits on the
-   page. In dark mode the image is inverted and screened so the same trick
-   works against the dark background. */
-.about-aside {
-  float: right;
-  width: 8rem;
-  margin: 0.3rem 0 0.8rem 1.5rem;
-}
-.about-aside img {
+/* The Leica stands in for a self-portrait, top-left of About. No frame:
+   multiply blends the white background straight into the paper so the
+   camera just sits on the page. In dark mode the image is inverted and
+   screened so the same trick works against the dark background. */
+.about-portrait-fig { margin: 0; }
+.about-portrait-fig img {
   display: block;
   width: 100%;
   height: auto;
@@ -343,9 +338,8 @@ a { color: inherit; text-decoration: none; }
   mix-blend-mode: multiply;
 }
 @media (prefers-color-scheme: dark) {
-  .about-aside img { filter: invert(1); mix-blend-mode: screen; }
+  .about-portrait-fig img { filter: invert(1); mix-blend-mode: screen; }
 }
-@media (max-width: 760px) { .about-aside { width: 6.5rem; margin-left: 1rem; } }
 
 .about-closing {
   font-weight: 500;
