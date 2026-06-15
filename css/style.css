@@ -325,20 +325,19 @@ a { color: inherit; text-decoration: none; }
 .about-text { max-width: 58ch; }
 .about-text p + p { margin-top: 1.25rem; }
 
-/* The Leica stands in for a self-portrait, top-left of About. No frame:
-   multiply blends the white background straight into the paper so the
-   camera just sits on the page. In dark mode the image is inverted and
-   screened so the same trick works against the dark background. */
-.about-portrait-fig { margin: 0; }
-.about-portrait-fig img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
+/* The Leica sits inline, just after the About heading, scaled to the
+   heading text (em units, so it tracks the clamp at every breakpoint).
+   No frame: multiply blends the white background into the page; in dark
+   mode it's inverted and screened so the same trick works on the dark bg. */
+.title-mark {
+  height: 0.78em;
+  width: auto;
+  margin-left: 0.22em;
+  vertical-align: -0.04em;
   mix-blend-mode: multiply;
 }
 @media (prefers-color-scheme: dark) {
-  .about-portrait-fig img { filter: invert(1); mix-blend-mode: screen; }
+  .title-mark { filter: invert(1); mix-blend-mode: screen; }
 }
 
 .about-closing {
