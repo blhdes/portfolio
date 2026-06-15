@@ -326,8 +326,10 @@ a { color: inherit; text-decoration: none; }
 .about-text p + p { margin-top: 1.25rem; }
 
 /* Small editorial accent floated beside the photography paragraph — a
-   margin illustration, not a gallery tile. Framed like .app-shot so the
-   white background reads as a print in both themes. */
+   margin illustration, not a gallery tile. No frame: multiply blends the
+   white background straight into the paper so the camera just sits on the
+   page. In dark mode the image is inverted and screened so the same trick
+   works against the dark background. */
 .about-aside {
   float: right;
   width: 8rem;
@@ -338,8 +340,10 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;
-  border: 1px solid var(--line);
-  border-radius: 8px;
+  mix-blend-mode: multiply;
+}
+@media (prefers-color-scheme: dark) {
+  .about-aside img { filter: invert(1); mix-blend-mode: screen; }
 }
 @media (max-width: 760px) { .about-aside { width: 6.5rem; margin-left: 1rem; } }
 
