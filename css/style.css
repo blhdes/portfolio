@@ -175,13 +175,13 @@ a { color: inherit; text-decoration: none; }
 .r-21 { aspect-ratio: 2 / 1; }
 
 /* Real photos sit in the same grid as the placeholders: fill the cell,
-   crop with object-fit so the declared ratio always holds. */
+   crop with object-fit so the declared ratio always holds. No frame, just
+   the picture over the background. */
 .photo {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border: 1px solid var(--line);
 }
 /* A landscape spread reads better spanning two columns (full width on the
    two-column mobile layout). */
