@@ -580,13 +580,8 @@ a { color: inherit; text-decoration: none; }
 .contact-links a { color: var(--band-muted); text-decoration: underline; text-underline-offset: 3px; }
 .contact-links a:hover { color: var(--band-fg); }
 
-.contact-rule {
-  border: 0;
-  border-top: 1px solid var(--band-line);
-  margin: clamp(3rem, 8vh, 5rem) 0 1.5rem;
-}
-
 .contact-fine {
+  margin-top: clamp(3rem, 8vh, 5rem);
   font-size: 0.8125rem;
   color: var(--band-muted);
 }
