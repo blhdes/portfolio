@@ -191,24 +191,27 @@ a { color: inherit; text-decoration: none; }
   padding: 0.4rem 0.7rem;
 }
 
-.ph-phone { aspect-ratio: 9 / 19; }
 .ph-portrait { aspect-ratio: 3 / 4; }
-.r-43 { aspect-ratio: 4 / 3; }
-.r-34 { aspect-ratio: 3 / 4; }
-.r-11 { aspect-ratio: 1 / 1; }
 
-/* Real photos sit in the grid at their natural shape — no frame, no crop,
-   just the picture over the background. The width/height attributes on the
-   <img> reserve the right space so nothing jumps as the image loads. */
+/* Photos lay out as "justified rows" (see .photo-grid below). Each photo's
+   width is decided by flexbox; aspect-ratio then sets the matching height so
+   the picture keeps its true shape — no frame, no crop. grow ∝ aspect ratio
+   so every photo sharing a row ends up the SAME height while the row stretches
+   to fill the full width. --ar (width/height) is set per photo by js/main.js
+   from the <img> width/height attributes, so new photos need no extra wiring. */
 .photo {
+  --ar: 1.5;
   display: block;
-  width: 100%;
   height: auto;
+  aspect-ratio: var(--ar);
+  flex: var(--ar) 1 calc(var(--ar) * var(--row-h));
+  min-width: 0;
+  object-fit: cover; /* the box already matches the true ratio, so this never crops */
   cursor: zoom-in;
+  transition: opacity 0.2s ease;
 }
-/* A landscape spread reads better spanning two columns (full width on the
-   two-column mobile layout). */
-.photo-wide { grid-column: span 2; }
+.photo:hover,
+.photo:focus-visible { opacity: 0.88; }
 
 /* ······ links ······ */
 
@@ -274,13 +277,17 @@ a { color: inherit; text-decoration: none; }
 
 /* ······ photography ······ */
 
+/* Justified rows: photos flow left-to-right and wrap; --row-h is the target
+   height each row is built around. flex-grow (per photo, ∝ its aspect ratio)
+   then stretches each row to fill the full width, keeping every height in the
+   row equal. js/main.js stops the final, partial row from over-stretching. */
 .photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  --row-h: clamp(200px, 23vw, 290px);
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
-  align-items: start;
 }
-@media (max-width: 760px) { .photo-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 760px) { .photo-grid { --row-h: clamp(160px, 42vw, 240px); gap: 0.75rem; } }
 
 /* ······ music ······ */
 
