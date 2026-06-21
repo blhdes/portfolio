@@ -167,32 +167,6 @@ a { color: inherit; text-decoration: none; }
   .section-head { flex-direction: column; gap: 0.75rem; }
 }
 
-/* ······ placeholders ······ */
-
-.ph {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--line);
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      transparent 0 14px,
-      var(--line) 14px 15px
-    );
-  color: var(--muted);
-}
-.ph span {
-  font-size: 0.6875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  text-align: center;
-  background: var(--paper);
-  padding: 0.4rem 0.7rem;
-}
-
-.ph-portrait { aspect-ratio: 3 / 4; }
-
 /* Photos lay out as "justified rows" (see .photo-grid below). Each photo's
    width is decided by flexbox; aspect-ratio then sets the matching height so
    the picture keeps its true shape — no frame, no crop. grow ∝ aspect ratio
@@ -382,6 +356,7 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 760px) { .about { grid-template-columns: 1fr; } }
 
 .about-portrait { max-width: 20rem; }
+.about-img { display: block; width: 100%; height: auto; }
 
 .about-text { max-width: 58ch; }
 .about-text p + p { margin-top: 1.25rem; }
