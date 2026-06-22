@@ -1,6 +1,18 @@
 // Keep the footer year current
 document.getElementById("year").textContent = new Date().getFullYear();
 
+// ······ casual image protection ······
+// Block right-click "Save Image As" and drag-to-save on every <img> (delegated
+// on document, so it also covers the lightbox image added at runtime). This is
+// a deterrent only — a displayed image can never be fully protected, since the
+// browser must download it to show it (DevTools, the Network tab, the direct
+// URL, and screenshots all remain).
+["contextmenu", "dragstart"].forEach((evt) =>
+  document.addEventListener(evt, (e) => {
+    if (e.target && e.target.tagName === "IMG") e.preventDefault();
+  })
+);
+
 // ······ photo lightbox ······
 // Tap any .photo to view it full-screen. A photo can point the viewer at a
 // larger file with data-full="..."; otherwise its own src is used, so this

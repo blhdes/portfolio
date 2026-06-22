@@ -52,6 +52,17 @@ body {
 
 ::selection { background: var(--accent); color: var(--paper); }
 
+/* Deter casual image saving — drag-to-desktop, text-style selection, and the
+   iOS long-press "Save Image" callout. Note: this only stops casual saving;
+   any displayed image is still reachable via DevTools / direct URL. */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
 a { color: inherit; text-decoration: none; }
 
 /* ······ nav ······ */
