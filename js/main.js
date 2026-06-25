@@ -64,16 +64,75 @@ document.getElementById("year").textContent = new Date().getFullYear();
 })();
 
 // ······ photo gallery ······
-// Photos stack one per row in a single column, every photo at the same height
-// (set in css/style.css). Each photo's true aspect ratio comes straight from
-// its width/height attributes, so the CSS can give it the matching width — no
-// crop, no layout shift, and new photos need no extra wiring.
+// Desktop: Flickr-style "justified rows". Photos are packed into rows and each
+// row is sized to a shared target height (--row-h), so every row reads at the
+// same size and fills the full width. (The old flex-only version let a row of
+// portrait/square photos balloon far taller than the rest — that was the "some
+// photos larger than others" bug.) Phone: one photo per row, full width — the
+// CSS handles that, so here we just clear the inline row sizing.
 (function () {
   const grid = document.querySelector(".photo-grid");
   if (!grid) return;
-  grid.querySelectorAll(".photo").forEach((p) => {
+  const photos = Array.from(grid.querySelectorAll(".photo"));
+  if (!photos.length) return;
+
+  // True aspect ratio from each photo's width/height attributes — known before
+  // the bytes load, so layout is stable and new photos need no extra wiring.
+  const ar = photos.map((p) => {
     const w = parseFloat(p.getAttribute("width"));
     const h = parseFloat(p.getAttribute("height"));
-    if (w && h) p.style.setProperty("--ar", (w / h).toFixed(4));
+    const r = w && h ? w / h : 1.5;
+    p.style.setProperty("--ar", r.toFixed(4));
+    return r;
   });
+
+  const MOBILE = 760;
+
+  // --row-h is a clamp(), so measure the resolved pixel value instead of parsing.
+  function targetHeight() {
+    const probe = document.createElement("div");
+    probe.style.cssText = "height:var(--row-h);position:absolute;visibility:hidden";
+    grid.appendChild(probe);
+    const h = probe.getBoundingClientRect().height;
+    probe.remove();
+    return h || 320;
+  }
+
+  function layout() {
+    // Phone: one photo per row. Drop the inline sizing so the CSS column wins.
+    if (window.innerWidth <= MOBILE) {
+      photos.forEach((p) => { p.style.width = ""; p.style.height = ""; });
+      return;
+    }
+
+    const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+    const target = targetHeight();
+    const W = grid.clientWidth;
+
+    let i = 0;
+    while (i < photos.length) {
+      // Grow the row until fitting it to the width would make it no taller than
+      // the target; then lock the row to that fitted height. A leftover final
+      // row that never fills the width just keeps the target height, left-aligned.
+      let sum = 0, j = i, h = target, full = false;
+      for (; j < photos.length; j++) {
+        sum += ar[j];
+        h = (W - gap * (j - i)) / sum; // height that makes this row exactly fill W
+        if (h <= target) { j++; full = true; break; }
+      }
+      const rowH = full ? h : target;
+      for (let k = i; k < j; k++) {
+        photos[k].style.height = rowH + "px";
+        photos[k].style.width = Math.floor(rowH * ar[k]) + "px";
+      }
+      i = j;
+    }
+  }
+
+  let raf;
+  window.addEventListener("resize", () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(layout);
+  });
+  layout();
 })();
