@@ -63,50 +63,17 @@ document.getElementById("year").textContent = new Date().getFullYear();
   });
 })();
 
-// ······ justified photo gallery ······
-// The photo grid lays out as "justified rows": every photo in a row shares one
-// height, with each width following the picture's true shape (the row math
-// lives in css/style.css). This script does two small things:
-//   1. tells each photo its aspect ratio so the CSS row math can work, and
-//   2. stops the final, partial row from stretching its few photos to an
-//      oversized height — it pins that row to the target height, left-aligned,
-//      the way photo galleries normally finish off a grid.
+// ······ photo gallery ······
+// Photos stack one per row in a single column, every photo at the same height
+// (set in css/style.css). Each photo's true aspect ratio comes straight from
+// its width/height attributes, so the CSS can give it the matching width — no
+// crop, no layout shift, and new photos need no extra wiring.
 (function () {
   const grid = document.querySelector(".photo-grid");
   if (!grid) return;
-  const photos = Array.from(grid.querySelectorAll(".photo"));
-
-  // Aspect ratio comes straight from the width/height attributes, so it's known
-  // before the image bytes load — no layout shift, and new photos need no wiring.
-  photos.forEach((p) => {
+  grid.querySelectorAll(".photo").forEach((p) => {
     const w = parseFloat(p.getAttribute("width"));
     const h = parseFloat(p.getAttribute("height"));
     if (w && h) p.style.setProperty("--ar", (w / h).toFixed(4));
   });
-
-  function settleLastRow() {
-    // Start from a clean slate so every row is free to justify again.
-    photos.forEach((p) => (p.style.flexGrow = ""));
-    if (photos.length < 2) return;
-
-    // Reading offsetTop forces the browser to lay the photos out; photos that
-    // wrapped onto the same line share the same top.
-    const tops = photos.map((p) => p.offsetTop);
-    const maxTop = Math.max(...tops);
-    if (new Set(tops).size < 2) return; // it all fits on one row — let it justify
-
-    // The lowest row keeps the target height instead of ballooning to fill width.
-    photos.forEach((p, i) => {
-      if (tops[i] === maxTop) p.style.flexGrow = "0";
-    });
-  }
-
-  // Row breaks change with the viewport, so recompute on resize (debounced to
-  // one run per animation frame).
-  let raf;
-  window.addEventListener("resize", () => {
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(settleLastRow);
-  });
-  settleLastRow();
 })();
