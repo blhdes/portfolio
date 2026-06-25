@@ -10,11 +10,21 @@
   --muted: #8a857c;
   --line: #e5e1d6;
   --accent: #d9432b;
-  --font: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  /* ── FONT A/B TEST ──────────────────────────────────────────────
+     Press "F" to flip between Switzer (sans) and New York (serif).
+     New York is Apple's system serif, pulled in via the `ui-serif`
+     generic family — so it renders only on Apple devices (Mac / iPhone
+     / iPad). Non-Apple visitors fall back to Georgia / Times.
+     Remove this block + the inline script in index.html once decided. */
+  --font-switzer: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-ny: ui-serif, "New York", Georgia, "Times New Roman", serif;
+  --font: var(--font-switzer);
   --pad: clamp(1.25rem, 5vw, 4rem);
   --section-gap: clamp(5rem, 12vh, 8rem);
   color-scheme: light dark;
 }
+
+:root[data-font="ny"] { --font: var(--font-ny); }
 
 /* Dark version: follows the visitor's system setting. Same warm
    family as the light theme, the screening room instead of the page. */

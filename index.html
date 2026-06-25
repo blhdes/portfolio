@@ -12,7 +12,26 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://api.fontshare.com">
   <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=18">
+  <link rel="stylesheet" href="css/style.css?v=19">
+  <!-- ── FONT A/B TEST ── Press "F" to flip Switzer (sans) ⇄ New York
+       (serif). Choice is remembered. Delete this script + the CSS block
+       in style.css once the font is decided. -->
+  <script>
+    (function () {
+      var KEY = "font-ab";
+      var root = document.documentElement;
+      // Apply the saved choice before the page paints (no flash on reload).
+      if (localStorage.getItem(KEY) === "ny") root.setAttribute("data-font", "ny");
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "f" && e.key !== "F") return;
+        if (e.metaKey || e.ctrlKey || e.altKey) return; // leave browser shortcuts alone
+        var ny = root.getAttribute("data-font") !== "ny";
+        if (ny) { root.setAttribute("data-font", "ny"); localStorage.setItem(KEY, "ny"); }
+        else    { root.removeAttribute("data-font");    localStorage.removeItem(KEY); }
+        console.log("Font:", ny ? "New York (serif)" : "Switzer (sans)");
+      });
+    })();
+  </script>
 </head>
 <body>
 
