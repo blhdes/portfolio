@@ -3,35 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ale Gómez · Creative, App Maker, Photographer</title>
-  <meta name="description" content="Ale Gómez is a creative from Barcelona: apps on the App Store, photography, film, and a fashion brand on the way.">
+  <title>Ale Gómez · Product Design, UX & Photography</title>
+  <meta name="description" content="Ale Gómez, multidisciplinary creative in Barcelona. Product design, UX and photography: trained in cinema, shipping apps with AI. Open to creative roles in Europe.">
   <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#181613" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="preconnect" href="https://api.fontshare.com">
-  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=25">
-  <!-- ── FONT A/B TEST ── Press "F" to flip Switzer (sans) ⇄ New York
-       (serif). Choice is remembered. Delete this script + the CSS block
-       in style.css once the font is decided. -->
-  <script>
-    (function () {
-      var KEY = "font-ab";
-      var root = document.documentElement;
-      // Apply the saved choice before the page paints (no flash on reload).
-      if (localStorage.getItem(KEY) === "ny") root.setAttribute("data-font", "ny");
-      document.addEventListener("keydown", function (e) {
-        if (e.key !== "f" && e.key !== "F") return;
-        if (e.metaKey || e.ctrlKey || e.altKey) return; // leave browser shortcuts alone
-        var ny = root.getAttribute("data-font") !== "ny";
-        if (ny) { root.setAttribute("data-font", "ny"); localStorage.setItem(KEY, "ny"); }
-        else    { root.removeAttribute("data-font");    localStorage.removeItem(KEY); }
-        console.log("Font:", ny ? "New York (serif)" : "Switzer (sans)");
-      });
-    })();
-  </script>
+  <!-- Site font: SF Mono on Apple devices (built in, nothing to download).
+       JetBrains Mono is the equivalent for everyone else and only downloads
+       on devices that need it. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=34">
 </head>
 <body>
 
@@ -43,16 +28,16 @@
 <!-- <a href="#music">Music</a> --> <!-- hidden until there's more real material to show -->
 
       <a href="#projects">Projects</a>
-      <a href="#about">About</a>
       <a href="#cv">CV</a>
     </div>
     <a href="#contact" class="nav-contact">Contact</a>
   </nav>
 
   <header class="hero" id="top">
-    <p class="hero-kicker">Barcelona · open to creative roles in Europe</p>
+    <p class="hero-kicker">Product design <span class="hero-dot">·</span> UX <span class="hero-dot">·</span> Photography</p>
     <h1 class="hero-name">Ale Gómez</h1>
-    <p class="hero-line">I design and build apps, shoot photographs, and I'm launching my first fashion brand.</p>
+    <p class="hero-line">Cinema trained me in story and image. Now I design apps and ship them with AI, and shoot for brands and magazines.</p>
+    <p class="hero-meta">Barcelona · open to creative roles in Europe</p>
   </header>
 
   <main>
@@ -71,7 +56,7 @@
           </div>
           <div class="app-meta">
             <h3 class="app-name">Culla</h3>
-            <p class="app-desc">An iOS app designed, coded and shipped solo. Live on the App&nbsp;Store.</p>
+            <p class="app-desc">Photo library clean-up, one swipe at a time. My first app.</p>
             <div class="app-links">
               <a href="https://apps.apple.com/us/app/culla/id6761316914" target="_blank" rel="noopener">
                 <img class="app-badge" src="/icons/app-store-badge.svg" alt="Download Culla on the App Store" width="120" height="40" loading="lazy">
@@ -90,7 +75,7 @@
           </div>
           <div class="app-meta">
             <h3 class="app-name">CullaMusic</h3>
-            <p class="app-desc">The second app of the Culla family. Live on the App&nbsp;Store.</p>
+            <p class="app-desc">Apple Music sorting, one song at a time. Swipe into playlists.</p>
             <div class="app-links">
               <a href="https://apps.apple.com/us/app/cullamusic/id6778348600" target="_blank" rel="noopener">
                 <img class="app-badge" src="/icons/app-store-badge.svg" alt="Download CullaMusic on the App Store" width="120" height="40" loading="lazy">
@@ -109,7 +94,7 @@
           </div>
           <div class="app-meta">
             <h3 class="app-name">Doppio</h3>
-            <p class="app-desc">A minimalist BPM half-time / double-time tool for DJs — a living metronome. Live on the App&nbsp;Store.</p>
+            <p class="app-desc">A living metronome for DJs. Half-time and double-time BPM at a glance.</p>
             <div class="app-links">
               <a href="https://apps.apple.com/us/app/doppio/id6782931339" target="_blank" rel="noopener">
                 <img class="app-badge" src="/icons/app-store-badge.svg" alt="Download Doppio on the App Store" width="120" height="40" loading="lazy">
@@ -126,7 +111,7 @@
     <section class="section" id="photography">
       <div class="section-head">
         <h2 class="section-title">Photography</h2>
-        <p class="section-note">A small selection from a much larger archive &mdash; still being edited, with more on the way.</p>
+        <p class="section-note">A small selection from a much larger archive.</p>
       </div>
 
       <div class="photo-grid">
@@ -151,7 +136,7 @@
     <section class="section" id="music">
       <div class="section-head">
         <h2 class="section-title">Music</h2>
-        <p class="section-note">DJ mixes. More sessions on the way.</p>
+        <p class="section-note">DJ mixes.</p>
       </div>
 
       <div class="mix-list">
@@ -166,7 +151,7 @@
     <section class="section" id="projects">
       <div class="section-head">
         <h2 class="section-title">Projects</h2>
-        <p class="section-note">Film, cultural events, and soon a fashion brand.</p>
+        <p class="section-note">Film, events and brand work.</p>
       </div>
 
       <ul class="project-list">
@@ -228,31 +213,36 @@
       </ul>
     </section>
 
-    <section class="section" id="about">
-      <div class="section-head">
-        <h2 class="section-title">About<img class="title-mark" src="/photography/leica-m2.webp" alt="A Leica M2" width="664" height="664" loading="lazy"></h2>
+    <!-- The CV is its own full-bleed band: #cv is sent directly to
+         recruiters, so it reads as one self-contained document within the
+         site — the About story opens it, the structured CV follows. -->
+    <section class="cv-band" id="cv">
+      <div class="cv-band-inner">
+
+      <div class="about-block" id="about">
+        <div class="section-head">
+          <h2 class="section-title">About</h2>
+        </div>
+
+        <div class="about">
+          <div class="about-portrait">
+            <img class="about-img" src="/photography/ale-portrait.webp" alt="Ale G&oacute;mez &mdash; black-and-white profile portrait" width="901" height="1200" loading="lazy">
+          </div>
+          <div class="about-text">
+            <p>I'm a 28-year-old creative from Barcelona. I started in cinema: film school, directing shorts, and a year writing a feature in the screenwriting lab at Rodar y Rodar, the production company behind <em>The Orphanage</em>. Along the way I worked as a film programmer at the D'A Film Festival and covered festivals from Venice to San Sebastián.</p>
+            <p>Photography has run alongside everything since I was a kid: eight years as a photojournalist for a local magazine, then work for clients and brands.</p>
+            <p>Today I build apps. Working with AI agents gave me something cinema never could: the freedom to take an idea all the way to a finished product. Two of my apps are live on the App Store and more are on the way. My first fashion brand launches this year.</p>
+            <p class="about-closing">What drives me is where creativity and technology meet. A new world is taking shape, and I want to help build it.</p>
+          </div>
+        </div>
       </div>
 
-      <div class="about">
-        <div class="about-portrait">
-          <img class="about-img" src="/photography/ale-portrait.webp" alt="Ale G&oacute;mez &mdash; black-and-white profile portrait" width="901" height="1200" loading="lazy">
-        </div>
-        <div class="about-text">
-          <p>I'm a 28-year-old creative from Barcelona. I started in cinema: film school, directing shorts, and a year writing a feature in the screenwriting lab at Rodar y Rodar, the production company behind <em>The Orphanage</em>. Along the way I worked as a film programmer at the D'A Film Festival and covered festivals from Venice to San Sebastián.</p>
-          <p>Photography has run alongside everything since I was a kid: eight years as a photojournalist for a local magazine, then work for clients and brands.</p>
-          <p>Today I build apps. Working with AI agents gave me something cinema never could: the freedom to take an idea all the way to a finished product. Two of my apps are live on the App Store and more are on the way. My first fashion brand launches this year.</p>
-          <p class="about-closing">What drives me is where creativity and technology meet. A new world is taking shape, and I want to help build it.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="cv">
       <div class="section-head">
         <h2 class="section-title">CV</h2>
-        <p class="section-note">A structured summary, for when a company wants it at a glance. Full details on request.</p>
       </div>
 
       <div class="cv">
+        <div class="cv-col">
         <div class="cv-group">
           <p class="cv-group-title">Experience</p>
           <ul class="cv-list">
@@ -303,7 +293,9 @@
             </li>
           </ul>
         </div>
+        </div>
 
+        <div class="cv-col">
         <div class="cv-group">
           <p class="cv-group-title">Education</p>
           <ul class="cv-list">
@@ -357,9 +349,11 @@
         </div>
 
         <div class="cv-group">
-          <p class="cv-group-title">Interests</p>
-          <p class="cv-skills">Cinema and film festivals. DJ mixing. Tennis and chess. Coffee. New cities, camera in hand.</p>
+          <p class="cv-group-title">Hobbies &amp; Interests</p>
+          <p class="cv-skills">Cinema and film festivals. DJ mixing and electronic music production. Books. Tennis and chess. Coffee. New cities, camera in hand.</p>
         </div>
+        </div>
+      </div>
       </div>
     </section>
 
@@ -386,6 +380,6 @@
     <img class="lightbox-img" id="lightbox-img" alt="">
   </div>
 
-  <script src="js/main.js?v=25"></script>
+  <script src="js/main.js?v=34"></script>
 </body>
 </html>

@@ -6,31 +6,25 @@
 
 :root {
   --paper: #faf8f3;
+  --paper-2: #f2efe6;   /* one tone deeper: the CV band */
   --ink: #1a1815;
   --muted: #8a857c;
   --line: #e5e1d6;
   --accent: #d9432b;
-  /* ── FONT A/B TEST ──────────────────────────────────────────────
-     Press "F" to flip between Switzer (sans) and New York (serif).
-     New York is Apple's system serif, pulled in via the `ui-serif`
-     generic family — so it renders only on Apple devices (Mac / iPhone
-     / iPad). Non-Apple visitors fall back to Georgia / Times.
-     Remove this block + the inline script in index.html once decided. */
-  --font-switzer: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-ny: ui-serif, "New York", Georgia, "Times New Roman", serif;
-  --font: var(--font-switzer);
+  /* Site font, decided 2026-07-11: SF Mono on Apple devices (via
+     ui-monospace), JetBrains Mono everywhere else (loaded in index.html). */
+  --font: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
   --pad: clamp(1.25rem, 5vw, 4rem);
   --section-gap: clamp(5rem, 12vh, 8rem);
   color-scheme: light dark;
 }
-
-:root[data-font="ny"] { --font: var(--font-ny); }
 
 /* Dark version: follows the visitor's system setting. Same warm
    family as the light theme, the screening room instead of the page. */
 @media (prefers-color-scheme: dark) {
   :root {
     --paper: #181613;
+    --paper-2: #1f1c18;   /* one tone lighter in the dark theme */
     --ink: #ece9e2;
     --muted: #8f897e;
     --line: #312e28;
@@ -122,7 +116,9 @@ a { color: inherit; text-decoration: none; }
 /* ······ hero ······ */
 
 .hero {
-  padding: clamp(9rem, 22vh, 14rem) var(--pad) var(--section-gap);
+  /* Slightly shallower top than before: the bigger name earns back the
+     vertical presence, and the work stays near the fold. */
+  padding: clamp(8rem, 20vh, 12rem) var(--pad) var(--section-gap);
   max-width: 78rem;
   margin: 0 auto;
 }
@@ -132,11 +128,14 @@ a { color: inherit; text-decoration: none; }
   text-transform: uppercase;
   letter-spacing: 0.14em;
   color: var(--muted);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
+/* The one accent moment in the hero, echoing the nav's Contact. */
+.hero-dot { color: var(--accent); }
+
 .hero-name {
-  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-size: clamp(3.25rem, 11vw, 8.5rem);
   font-weight: 600;
   letter-spacing: -0.04em;
   line-height: 1.02;
@@ -146,9 +145,17 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(1.1875rem, 2.6vw, 1.625rem);
   font-weight: 500;
   letter-spacing: -0.01em;
-  margin-top: 1.5rem;
-  max-width: 30ch;
+  margin-top: 2rem;
+  max-width: 38ch;
   line-height: 1.3;
+}
+
+.hero-meta {
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-top: 2.75rem;
 }
 
 /* ······ sections ······ */
@@ -400,21 +407,6 @@ a { color: inherit; text-decoration: none; }
 .about-text { max-width: 58ch; }
 .about-text p + p { margin-top: 1.25rem; }
 
-/* The Leica sits inline, just after the About heading, scaled to the
-   heading text (em units, so it tracks the clamp at every breakpoint).
-   No frame: multiply blends the white background into the page; in dark
-   mode it's inverted and screened so the same trick works on the dark bg. */
-.title-mark {
-  height: 0.78em;
-  width: auto;
-  margin-left: 0.22em;
-  vertical-align: -0.04em;
-  mix-blend-mode: multiply;
-}
-@media (prefers-color-scheme: dark) {
-  .title-mark { filter: invert(1); mix-blend-mode: screen; }
-}
-
 .about-closing {
   font-weight: 500;
   font-size: 1.1875rem;
@@ -422,6 +414,35 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ······ cv ······ */
+
+/* The CV is its own zone. Recruiters land here directly via the #cv
+   anchor, so a full-bleed tone shift (one step deeper than the paper)
+   marks it as the document within the site — separation by tone and
+   whitespace, no divider lines, per the design principles. */
+.cv-band {
+  background: var(--paper-2);
+  padding: clamp(4rem, 9vh, 6.5rem) var(--pad);
+  /* No margin below: the band meets the footer directly. A paper-colored
+     gap here reads as a stray dark strip in dark mode, where the page
+     background is darker than both the band and the inverted footer. */
+}
+.cv-band-inner { max-width: 78rem; margin: 0 auto; }
+
+/* About opens the CV document; a section-sized breath separates the
+   story from the structured part below it. */
+.about-block { margin-bottom: clamp(4.5rem, 10vh, 7rem); }
+
+/* Two columns on wide screens: the story (Experience) beside the facts
+   (Education, Skills, Languages, Interests), so the whole CV reads at a
+   glance instead of as one long scroll. Stacks on narrow screens. */
+.cv {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: clamp(3rem, 6vh, 4.5rem);
+}
+@media (min-width: 900px) {
+  .cv { grid-template-columns: 7fr 5fr; column-gap: clamp(3.5rem, 7vw, 6rem); }
+}
 
 .cv-group + .cv-group { margin-top: clamp(3rem, 6vh, 4.5rem); }
 
