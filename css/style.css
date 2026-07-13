@@ -1,7 +1,8 @@
 /* ································································
    Ale Gómez · portfolio
    Minimal editorial: warm paper, ink text, one vermilion accent.
-   No animations, no effects. The work does the talking.
+   No animations, no effects — with one earned exception: the hero
+   middot field, which stays perfectly still until the visitor moves.
    ································································ */
 
 :root {
@@ -117,10 +118,28 @@ a { color: inherit; text-decoration: none; }
 
 .hero {
   /* Slightly shallower top than before: the bigger name earns back the
-     vertical presence, and the work stays near the fold. */
-  padding: clamp(8rem, 20vh, 12rem) var(--pad) var(--section-gap);
+     vertical presence, and the work stays near the fold. The hero itself
+     is full-bleed so the middot field reaches the screen edges; the text
+     stays in the usual centered column via .hero-inner. */
+  padding: clamp(8rem, 20vh, 12rem) 0 var(--section-gap);
+  /* Anchor for the middot-field canvas below. */
+  position: relative;
+}
+
+.hero-inner {
   max-width: 78rem;
   margin: 0 auto;
+  padding: 0 var(--pad);
+}
+
+/* The middot field (drawn by main.js). z-index -1 slips it behind the hero
+   text; pointer-events none keeps the text selectable through it. It only
+   spans the hero, so the rest of the page is untouched. */
+.hero-field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .hero-kicker {

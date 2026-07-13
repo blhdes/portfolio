@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=34">
+  <link rel="stylesheet" href="css/style.css?v=36">
 </head>
 <body>
 
@@ -34,10 +34,15 @@
   </nav>
 
   <header class="hero" id="top">
-    <p class="hero-kicker">Product design <span class="hero-dot">·</span> UX <span class="hero-dot">·</span> Photography</p>
-    <h1 class="hero-name">Ale Gómez</h1>
-    <p class="hero-line">Cinema trained me in story and image. Now I design apps and ship them with AI, and shoot for brands and magazines.</p>
-    <p class="hero-meta">Barcelona · open to creative roles in Europe</p>
+    <!-- Middot field: a dot grid drawn by main.js, invisible until the
+         pointer wakes it. Decorative only, so screen readers skip it. -->
+    <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <p class="hero-kicker">Product design <span class="hero-dot">·</span> UX <span class="hero-dot">·</span> Photography</p>
+      <h1 class="hero-name">Ale Gómez</h1>
+      <p class="hero-line">Cinema trained me in story and image. Now I design apps and ship them with AI, and shoot for brands and magazines.</p>
+      <p class="hero-meta">Barcelona · open to creative roles in Europe</p>
+    </div>
   </header>
 
   <main>
@@ -380,6 +385,6 @@
     <img class="lightbox-img" id="lightbox-img" alt="">
   </div>
 
-  <script src="js/main.js?v=34"></script>
+  <script src="js/main.js?v=36"></script>
 </body>
 </html>
