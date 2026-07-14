@@ -1,8 +1,9 @@
 /* ································································
    Ale Gómez · portfolio
    Minimal editorial: warm paper, ink text, one vermilion accent.
-   No animations, no effects — with one earned exception: the hero
-   middot field, which stays perfectly still until the visitor moves.
+   No animations, no effects — with one earned exception: the middot
+   field, which stays perfectly still until the visitor moves and
+   dissolves away into the Apps section instead of ending at an edge.
    ································································ */
 
 :root {
@@ -122,8 +123,6 @@ a { color: inherit; text-decoration: none; }
      is full-bleed so the middot field reaches the screen edges; the text
      stays in the usual centered column via .hero-inner. */
   padding: clamp(8rem, 20vh, 12rem) 0 var(--section-gap);
-  /* Anchor for the middot-field canvas below. */
-  position: relative;
 }
 
 .hero-inner {
@@ -132,12 +131,14 @@ a { color: inherit; text-decoration: none; }
   padding: 0 var(--pad);
 }
 
-/* The middot field (drawn by main.js). z-index -1 slips it behind the hero
-   text; pointer-events none keeps the text selectable through it. It only
-   spans the hero, so the rest of the page is untouched. */
-.hero-field {
+/* The middot field (drawn by main.js). It lies over the page from the top
+   edge down into the Apps section — the script sets its height to end where
+   the field has fully dissolved. z-index -1 slips it behind all content;
+   pointer-events none keeps everything selectable and clickable through it. */
+.dot-field {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   z-index: -1;
   pointer-events: none;
 }

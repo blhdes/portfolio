@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=36">
+  <link rel="stylesheet" href="css/style.css?v=37">
 </head>
 <body>
 
@@ -33,10 +33,14 @@
     <a href="#contact" class="nav-contact">Contact</a>
   </nav>
 
+  <!-- Middot field: a dot grid drawn by main.js, invisible until the
+       pointer wakes it. It spans from the top of the page down into the
+       Apps section, where it dissolves away — so the effect introduces
+       the work instead of stopping at the hero's edge. Decorative only,
+       so screen readers skip it. -->
+  <canvas class="dot-field" id="dot-field" aria-hidden="true"></canvas>
+
   <header class="hero" id="top">
-    <!-- Middot field: a dot grid drawn by main.js, invisible until the
-         pointer wakes it. Decorative only, so screen readers skip it. -->
-    <canvas class="hero-field" id="hero-field" aria-hidden="true"></canvas>
     <div class="hero-inner">
       <p class="hero-kicker">Product design <span class="hero-dot">·</span> UX <span class="hero-dot">·</span> Photography</p>
       <h1 class="hero-name">Ale Gómez</h1>
@@ -385,6 +389,6 @@
     <img class="lightbox-img" id="lightbox-img" alt="">
   </div>
 
-  <script src="js/main.js?v=36"></script>
+  <script src="js/main.js?v=37"></script>
 </body>
 </html>
