@@ -632,6 +632,23 @@ a { color: inherit; text-decoration: none; }
   text-decoration-color: var(--band-accent);
 }
 
+.contact-phone {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--band-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--band-line);
+}
+.contact-phone:hover {
+  color: var(--band-accent);
+  text-decoration-color: var(--band-accent);
+}
+
 .contact-links {
   display: flex;
   flex-wrap: wrap;
