@@ -179,17 +179,18 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* For any page whose content doesn't fill a screen — home, the
-   Photography index, Projects, Portraits — the whole page fills
-   exactly one screen, no scrollbar: nav stays fixed on top, the
-   content sits near the top of the remaining space (not vertically
-   centred), and the footer pins to the true bottom edge instead of
-   trailing after short content with a scroll needed to reach it.
-   Scoped to body.fit-screen, added only to pages confirmed short
-   enough not to clip — Apps and the Flash Magazine gallery are
-   genuinely taller than one screen and must keep scrolling normally,
-   so they never get this class. `main` is used generically (rather
-   than repeating .index / .page / .archive) since every page has
-   exactly one, whatever its own class. */
+   Photography index, Portraits — the whole page fills exactly one
+   screen, no scrollbar: nav stays fixed on top, the content sits near
+   the top of the remaining space (not vertically centred), and the
+   footer pins to the true bottom edge instead of trailing after short
+   content with a scroll needed to reach it. Scoped to body.fit-screen,
+   added only to pages confirmed short enough not to clip — Apps, the
+   Flash Magazine gallery, and Projects are genuinely (or, for Projects,
+   became once .project stacks to a column on mobile — see its own
+   media query below) taller than one screen and must keep scrolling
+   normally, so they never get this class.
+   `main` is used generically (rather than repeating .index / .page /
+   .archive) since every page has exactly one, whatever its own class. */
 body.fit-screen {
   height: 100vh;
   height: 100svh;
