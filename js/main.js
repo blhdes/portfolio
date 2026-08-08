@@ -13,9 +13,14 @@ if (moved[location.hash] && !document.querySelector(location.hash)) {
   location.replace(moved[location.hash]);
 }
 
-// Keep the year in the Info page's fine print current
+// Keep the footer's copyright year current
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+// The CV page's "Download PDF" is the browser's own print dialog:
+// print-to-PDF gives a clean document via the @media print styles.
+const printCv = document.getElementById("print-cv");
+if (printCv) printCv.addEventListener("click", () => window.print());
 
 // ······ casual image protection ······
 // Block right-click "Save Image As" and drag-to-save on every <img> (delegated
