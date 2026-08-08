@@ -6,8 +6,8 @@ const moved = {
   "#apps": "/apps/",
   "#projects": "/projects/",
   "#cv": "/cv/",
-  "#about": "/info/",
-  "#contact": "/info/",
+  "#about": "/cv/",
+  "#contact": "/cv/",
 };
 if (moved[location.hash] && !document.querySelector(location.hash)) {
   location.replace(moved[location.hash]);
