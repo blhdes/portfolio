@@ -13,31 +13,35 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=65">
+  <link rel="stylesheet" href="css/style.css?v=67">
 </head>
 <body class="fit-screen">
 
-  <!-- The home page is the name (same quiet top bar the subpages use,
-       no menu on the right) and the way in, nothing else. No .index
-       wrapper here — the link list is the page's whole content, so it
-       IS the <main>, one element instead of two. Full-bleed: the whole
-       page fits one screen, no scroll (see body.fit-screen in
-       style.css). -->
+  <!-- Home now uses the exact same nav every other page has (masthead
+       + Photography/Apps/Projects/CV row) instead of its own separate
+       vertical link list — the nav already gets you anywhere, so a
+       second copy of the same four links in the body was redundant.
+       No link gets aria-current: home isn't any one of those four
+       sections. The page body is otherwise empty; full-bleed, no
+       scroll (see body.fit-screen in style.css). -->
   <nav class="nav">
     <a href="/" class="nav-name">ALEJANDRO GÓMEZ URREA</a>
+    <div class="nav-links">
+      <a href="/photography/">Photography</a>
+      <a href="/apps/">Apps</a>
+      <a href="/projects/">Projects</a>
+      <a href="/cv/">CV</a>
+    </div>
   </nav>
 
-  <main class="index-links" id="top" aria-label="Sections">
-    <a href="/photography/">Photography</a>
-    <a href="/apps/">Apps</a>
-    <a href="/projects/">Projects</a>
-    <a href="/cv/">CV</a>
+  <main class="page">
+    <h1 class="sr-only">Ale G&oacute;mez</h1>
   </main>
 
   <footer class="site-footer">
     <p>&copy; Ale G&oacute;mez, <span id="year">2026</span></p>
   </footer>
 
-  <script src="js/main.js?v=65"></script>
+  <script src="js/main.js?v=67"></script>
 </body>
 </html>

@@ -195,10 +195,12 @@ body.fit-screen .site-footer {
   padding: 0 var(--pad) clamp(1.5rem, 4vh, 2.5rem);
 }
 
-/* The block as a whole centres on the page (width: fit-content + auto
+/* Used by Photography's index page only now (home dropped its own
+   separate link list in favour of the standard nav — see index.html).
+   The block as a whole centres on the page (width: fit-content + auto
    margins shrink-wraps it to its longest link, then centres that
    shrunk box); the links inside stay left-aligned relative to each
-   other, sharing one left edge, same as before. */
+   other, sharing one left edge. */
 .index-links {
   display: flex;
   flex-direction: column;
@@ -206,16 +208,6 @@ body.fit-screen .site-footer {
   gap: 1.1rem;
   width: fit-content;
   margin: 0 auto;
-}
-
-/* On home, .index-links IS the page's <main> — no separate .index
-   wrapper — so it also carries the page-width cap and nav clearance
-   that .index provides for Photography's version (where .index-links
-   nests inside .index instead). Scoped to the element being <main>
-   specifically, so this never touches Photography's nested usage. */
-main.index-links {
-  max-width: 78rem;
-  padding: clamp(7.5rem, 16vh, 10rem) var(--pad) 0;
 }
 
 .index-links a {
