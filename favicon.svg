@@ -3,5 +3,10 @@
     .sq { fill: #1A1815; }
     @media (prefers-color-scheme: dark) { .sq { fill: #ECE9E2; } }
   </style>
-  <rect class="sq" width="32" height="32" rx="6"/>
+  <!-- fill= is the Safari fallback: it ignores the <style> block above
+       entirely (renders blank without this), so this fixed light-mode
+       color guarantees a visible icon there. Browsers that do support
+       the style block let its higher-specificity CSS override this
+       attribute and get the live light/dark switch. -->
+  <rect class="sq" fill="#1A1815" width="32" height="32" rx="6"/>
 </svg>
