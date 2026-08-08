@@ -130,6 +130,7 @@ a { color: inherit; text-decoration: none; }
 }
 .nav-links::-webkit-scrollbar { display: none; }  /* WebKit: hide the scrollbar */
 .nav-links a {
+  position: relative;
   color: var(--ink-soft);
   font-weight: 500;
   white-space: nowrap;
@@ -148,6 +149,16 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 600px) {
   .nav { gap: 0.65rem; padding: 1.25rem var(--pad); }
+  /* .nav-links is normally pinned to .nav-name's exact width (see the
+     comment above), which leaves near-zero slack on narrow screens: the
+     masthead font shrinks toward its clamp() minimum here while the
+     links stay a fixed size, so real device font metrics (SF Mono vs.
+     JetBrains Mono) can push the links past that width. Without a
+     fallback, the overflow goes into the hidden-scrollbar safety net
+     below and a link (often "CV") disappears with no visible way to
+     reach it. flex-wrap lets a link that doesn't fit drop to a second
+     line instead, so nothing is ever invisible. */
+  .nav-links { flex-wrap: wrap; row-gap: 0.5rem; }
 }
 
 /* ······ home index ······ */
@@ -211,6 +222,7 @@ body.fit-screen .site-footer {
 }
 
 .index-links a {
+  position: relative;
   font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -514,6 +526,7 @@ body.fit-screen .site-footer {
 /* The print trigger: a button dressed as a quiet link, same voice as
    .archive-link. Hidden on paper — see @media print below. */
 .cv-print {
+  position: relative;
   display: block;
   margin-top: 1.5rem;
   padding: 0;
@@ -528,6 +541,18 @@ body.fit-screen .site-footer {
   cursor: pointer;
 }
 .cv-print:hover { color: var(--ink-soft); }
+
+/* These three are the site's smallest tap targets on phone: plain text
+   links/buttons with no padding of their own, well under the ~44px a
+   thumb needs. An absolutely-positioned, invisible ::after widens the
+   hit area without changing the visible size or shifting layout. */
+.nav-links a::after,
+.index-links a::after,
+.cv-print::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+}
 
 /* Two columns on wide screens: the story (Experience) beside the facts
    (Education, Skills, Languages, Interests), so the whole CV reads at a

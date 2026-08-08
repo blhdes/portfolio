@@ -46,6 +46,7 @@ if (printCv) printCv.addEventListener("click", () => window.print());
   const photos = document.querySelectorAll(".photo");
 
   let lastFocused = null;
+  let scrollY = 0;
 
   function open(photo) {
     lastFocused = photo;
@@ -53,14 +54,26 @@ if (printCv) printCv.addEventListener("click", () => window.print());
     lightboxImg.alt = photo.alt || "";
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden"; // stop the page scrolling behind
+    // overflow:hidden alone doesn't stop iOS Safari's touch-driven rubber-band
+    // scroll from moving the page underneath a fixed-position overlay. Pinning
+    // the body itself with position:fixed (and restoring the exact scroll
+    // offset on close) removes anything for that gesture to scroll.
+    scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
     closeBtn.focus();
   }
 
   function close() {
     lightbox.classList.remove("is-open");
     lightbox.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    window.scrollTo(0, scrollY);
     lightboxImg.src = "";
     if (lastFocused) lastFocused.focus();
   }
