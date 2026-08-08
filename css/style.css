@@ -1,33 +1,34 @@
 /* ································································
    Ale Gómez · portfolio
-   Minimal editorial: warm paper, ink text, near-monochrome; the
-   photographs are the only colour on the site. One typeface, Inter,
-   throughout — hierarchy comes from weight and size, not a second
-   display face. The home page is a bare index — name and links — and
-   every body of work lives on its own page. No animations, no effects.
+   Minimal editorial: pure white, near-black ink, neutral greys — no
+   warm undertone anywhere, the photographs are the only colour on the
+   site. One typeface, Inter, throughout — hierarchy comes from weight
+   and size, not a second display face. The home page is a bare index
+   — name and links — and every body of work lives on its own page.
+   No animations, no effects.
    ································································ */
 
 :root {
-  --ink: #1A1815;
-  --ink-soft: #55504A;
-  --paper: #F7F5F0;
-  --paper-warm: #EFECE4;   /* one tone deeper: the CV band */
-  --line: #D8D3C8;
+  --ink: #000000;
+  --ink-soft: #666666;
+  --paper: #FFFFFF;
+  --paper-warm: #F2F2F2;   /* one tone deeper: the CV band */
+  --line: #E0E0E0;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --pad: clamp(1.25rem, 5vw, 4rem);
   --section-gap: clamp(5.5rem, 10vh, 9rem);
   color-scheme: light dark;
 }
 
-/* Dark version: follows the visitor's system setting. Same warm
-   family as the light theme, the screening room instead of the page. */
+/* Dark version: follows the visitor's system setting. Same pure,
+   neutral pairing inverted — true black instead of true white. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --ink: #ECE9E2;
-    --ink-soft: #9C968B;
-    --paper: #181613;
-    --paper-warm: #1F1C18;   /* one tone lighter in the dark theme */
-    --line: #312E28;
+    --ink: #FFFFFF;
+    --ink-soft: #999999;
+    --paper: #000000;
+    --paper-warm: #141414;   /* one tone lighter in the dark theme */
+    --line: #2A2A2A;
   }
 }
 
@@ -78,51 +79,74 @@ a { color: inherit; text-decoration: none; }
 
 /* Stacked, both rows sharing one left edge — matching the reference
    (biancacensori.com): the masthead sits on its own line, the section
-   links on the line below it, not side by side in a single row. */
+   links on the line below it, not side by side in a single row.
+   display: grid with a single max-content column is what lets the
+   links row below match the masthead's exact width (see .nav-links):
+   the column's width is set entirely by .nav-name's own intrinsic
+   size, then .nav-links is stretched to fill it exactly. */
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: max-content;
   gap: 0.85rem;
   padding: 1.5rem var(--pad);
   font-size: 0.875rem;
-  background: var(--paper);
 }
 
 /* The site's one real masthead — reference: biancacensori.com, where
    the site name reads noticeably larger than the nav links below it,
    in caps, weight rather than size carrying most of that contrast
    since both are Inter. Everything else on the site stays deliberately
-   modest; this is the one place that's allowed real presence. */
+   modest; this is the one place that's allowed real presence. Its
+   width sets the width of the links row below (see .nav-links). */
 .nav-name {
   font-size: clamp(1.0625rem, 2vw, 1.25rem);
   font-weight: 600;
   letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
-/* The section links, on their own row under the masthead. When the
-   screen is too narrow to fit them all, this row scrolls sideways
-   instead of pushing the page wider — so the nav never causes
-   horizontal overflow, and every section stays reachable on a phone. */
+/* The section links, on their own row under the masthead, stretched
+   to span exactly the masthead's width — never wider, never shorter —
+   with space-between so the first link's left edge and the last
+   link's right edge land exactly on the masthead's own edges. The
+   width: 0 / min-width: 100% pair is what does this: width: 0 stops
+   this row contributing its own (potentially different) content width
+   to the grid column's sizing, leaving .nav-name as the sole source of
+   that width; min-width: 100% then stretches this row to fill it
+   exactly. overflow-x is a safety net for the rare viewport where the
+   link text genuinely can't fit even at zero gap. */
 .nav-links {
   display: flex;
-  gap: 1.75rem;
-  max-width: 100%;
-  min-width: 0;
+  justify-content: space-between;
+  width: 0;
+  min-width: 100%;
   overflow-x: auto;
   scrollbar-width: none;              /* Firefox: hide the scrollbar */
   -webkit-overflow-scrolling: touch;  /* momentum scroll on iOS */
 }
 .nav-links::-webkit-scrollbar { display: none; }  /* WebKit: hide the scrollbar */
-.nav-links a { color: var(--ink-soft); white-space: nowrap; letter-spacing: 0.01em; }
+.nav-links a {
+  color: var(--ink-soft);
+  font-weight: 500;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
 .nav-links a:hover { color: var(--ink); }
+
+/* "You are here": the current page's link stands apart from the rest
+   — full ink instead of muted, and as bold as the masthead itself —
+   so it's clear at a glance which section you're in. Set via
+   aria-current="page" in the HTML, already present on every subpage. */
+.nav-links a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+}
 
 @media (max-width: 600px) {
   .nav { gap: 0.65rem; padding: 1.25rem var(--pad); }
-  .nav-links { gap: 1.25rem; }
 }
 
 /* ······ home index ······ */
@@ -138,30 +162,34 @@ a { color: inherit; text-decoration: none; }
   padding: clamp(7.5rem, 16vh, 10rem) var(--pad) var(--section-gap);
 }
 
-/* Home only: the whole page fills exactly one screen, no scrollbar —
-   nav stays fixed on top, the index links sit near the top of the
-   remaining space (not vertically centred), and the footer pins to
-   the bottom. Scoped to body.home so it doesn't affect the Photography
-   index, which reuses the plain .index above and scrolls normally.
-   The links are horizontally centred via .index-links (align-items:
-   center) — a shared rule, so Photography's link list centres the
-   same way automatically. */
-body.home {
+/* For any page whose content doesn't fill a screen — home, the
+   Photography index, Projects, Info, Portraits — the whole page fills
+   exactly one screen, no scrollbar: nav stays fixed on top, the
+   content sits near the top of the remaining space (not vertically
+   centred), and the footer pins to the true bottom edge instead of
+   trailing after short content with a scroll needed to reach it.
+   Scoped to body.fit-screen, added only to pages confirmed short
+   enough not to clip — Apps and the Flash Magazine gallery are
+   genuinely taller than one screen and must keep scrolling normally,
+   so they never get this class. `main` is used generically (rather
+   than repeating .index / .page / .archive) since every page has
+   exactly one, whatever its own class. */
+body.fit-screen {
   height: 100vh;
   height: 100svh;
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
-body.home .index {
+body.fit-screen main {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: clamp(7.5rem, 16vh, 10rem) var(--pad) 0;
+  padding-bottom: 0;
 }
-body.home .site-footer {
+body.fit-screen .site-footer {
   flex-shrink: 0;
   padding: 0 var(--pad) clamp(1.5rem, 4vh, 2.5rem);
 }
@@ -191,7 +219,15 @@ body.home .site-footer {
 /* Every body of work lives on its own page: one 78rem column opening
    with its own headroom under the fixed nav. (Photography and the CV
    use their own variants, .archive and .cv-page, further down.) */
+/* min-height: 100vh, same technique .index already uses (see below) —
+   guarantees the page (and so .site-footer right after it, in normal
+   flow) never ends above one full screen, whether content is long or
+   short. Simpler and more reliable than flex-grow distribution, which
+   depends on how the browser resolves a flex container whose own
+   height comes only from min-height rather than a definite height. */
 .page {
+  min-height: 100vh;
+  min-height: 100svh;
   max-width: 78rem;
   margin: 0 auto;
   padding: clamp(7.5rem, 16vh, 10rem) var(--pad) var(--section-gap);
@@ -319,7 +355,11 @@ body.home .site-footer {
    nav (this page has no hero). Narrower than the 78rem text column so
    a landscape photo reads as a plate, not a banner; every photo is
    large, natural shape, with a screenful of air between pieces. */
+/* min-height: 100vh, same technique as .page / .index — see .page's
+   comment above for why this is used instead of flex-grow. */
 .archive {
+  min-height: 100vh;
+  min-height: 100svh;
   max-width: 64rem;
   margin: 0 auto;
   padding: clamp(7.5rem, 16vh, 10rem) var(--pad) var(--section-gap);
@@ -660,7 +700,7 @@ body.home .site-footer {
   justify-content: center;
   font-size: 1.75rem;
   line-height: 1;
-  color: #F7F5F0;
+  color: #FFFFFF;
   background: none;
   border: none;
   cursor: pointer;
