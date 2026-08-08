@@ -1,23 +1,21 @@
 /* ································································
    Ale Gómez · portfolio
-   Minimal editorial: warm paper, ink text, one vermilion accent.
-   No animations, no effects — with one earned exception: the middot
-   field, which stays perfectly still until the visitor moves and
-   dissolves away into the Apps section instead of ending at an edge.
+   Minimal editorial: warm paper, ink text, near-monochrome; the
+   photographs are the only colour on the site. One typeface, Inter,
+   throughout — hierarchy comes from weight and size, not a second
+   display face. The home page is a bare index — name and links — and
+   every body of work lives on its own page. No animations, no effects.
    ································································ */
 
 :root {
-  --paper: #faf8f3;
-  --paper-2: #f2efe6;   /* one tone deeper: the CV band */
-  --ink: #1a1815;
-  --muted: #8a857c;
-  --line: #e5e1d6;
-  --accent: #d9432b;
-  /* Site font, decided 2026-07-11: SF Mono on Apple devices (via
-     ui-monospace), JetBrains Mono everywhere else (loaded in index.html). */
-  --font: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --ink: #1A1815;
+  --ink-soft: #55504A;
+  --paper: #F7F5F0;
+  --paper-warm: #EFECE4;   /* one tone deeper: the CV band */
+  --line: #D8D3C8;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --pad: clamp(1.25rem, 5vw, 4rem);
-  --section-gap: clamp(5rem, 12vh, 8rem);
+  --section-gap: clamp(5.5rem, 10vh, 9rem);
   color-scheme: light dark;
 }
 
@@ -25,12 +23,11 @@
    family as the light theme, the screening room instead of the page. */
 @media (prefers-color-scheme: dark) {
   :root {
+    --ink: #ECE9E2;
+    --ink-soft: #9C968B;
     --paper: #181613;
-    --paper-2: #1f1c18;   /* one tone lighter in the dark theme */
-    --ink: #ece9e2;
-    --muted: #8f897e;
-    --line: #312e28;
-    --accent: #e8553d;
+    --paper-warm: #1F1C18;   /* one tone lighter in the dark theme */
+    --line: #312E28;
   }
 }
 
@@ -39,6 +36,12 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+  /* Reserve the scrollbar's width on every page, whether or not its
+     content is tall enough to need one. Without this, short pages
+     (home) render a hair wider than tall pages (every subpage), and
+     the fixed nav — anchored to the true viewport edge — visibly
+     shifts left the instant a scrollbar appears. */
+  scrollbar-gutter: stable;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -46,17 +49,17 @@ html {
 }
 
 body {
-  font-family: var(--font);
+  font-family: var(--font-body);
   background: var(--paper);
   color: var(--ink);
-  font-size: 1.0625rem;
+  font-size: 1rem;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   /* Safety net: nothing should ever push the page wider than the screen. */
   overflow-x: hidden;
 }
 
-::selection { background: var(--accent); color: var(--paper); }
+::selection { background: var(--ink); color: var(--paper); }
 
 /* Deter casual image saving — drag-to-desktop, text-style selection, and the
    iOS long-press "Save Image" callout. Note: this only stops casual saving;
@@ -80,14 +83,25 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   align-items: baseline;
   gap: 1.25rem;
-  padding: 1.1rem var(--pad);
+  padding: 1.25rem var(--pad);
   font-size: 0.875rem;
   background: var(--paper);
 }
 
 /* The name anchors the left edge and never shrinks. The auto margin pushes
-   the links + Contact to the right, as before. */
-.nav-name { font-weight: 600; letter-spacing: -0.01em; flex-shrink: 0; margin-right: auto; }
+   the links + Contact to the right, as before. It's the site's one real
+   masthead — reference: biancacensori.com, where the site name reads
+   noticeably larger than the nav links beside it, in caps, weight
+   rather than size carrying most of that contrast since both are Inter.
+   Everything else on the site stays deliberately modest; this is the
+   one place that's allowed real presence. */
+.nav-name {
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+  margin-right: auto;
+}
 
 /* The section links sit on the right. When the screen is too narrow to fit
    them all, this row scrolls sideways instead of pushing the page wider — so
@@ -102,129 +116,85 @@ a { color: inherit; text-decoration: none; }
   -webkit-overflow-scrolling: touch;  /* momentum scroll on iOS */
 }
 .nav-links::-webkit-scrollbar { display: none; }  /* WebKit: hide the scrollbar */
-.nav-links a { color: var(--muted); white-space: nowrap; }
+.nav-links a { color: var(--ink-soft); white-space: nowrap; }
 .nav-links a:hover { color: var(--ink); }
-
-/* Contact lives outside the scroll area so the primary call to action stays
-   visible even when the other links scroll off on a narrow screen. */
-.nav-contact { flex-shrink: 0; color: var(--accent); white-space: nowrap; }
-.nav-contact:hover { color: var(--ink); }
 
 @media (max-width: 600px) {
   .nav { gap: 1rem; }
   .nav-links { gap: 1.25rem; }
 }
 
-/* ······ hero ······ */
+/* ······ home index ······ */
 
-.hero {
-  /* Slightly shallower top than before: the bigger name earns back the
-     vertical presence, and the work stays near the fold. The hero itself
-     is full-bleed so the middot field reaches the screen edges; the text
-     stays in the usual centered column via .hero-inner. */
-  padding: clamp(8rem, 20vh, 12rem) 0 var(--section-gap);
+/* The home page is an index: the name sits in the same quiet top bar
+   the subpages use, and the body holds only the way into each body of
+   work. Nothing else. */
+.index {
+  max-width: 78rem;
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: clamp(7rem, 24vh, 15rem) var(--pad) var(--section-gap);
 }
 
-.hero-inner {
+.index-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+.index-links a {
+  font-size: clamp(0.9375rem, 1.25vw, 1.0625rem);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+.index-links a:hover { color: var(--ink-soft); }
+
+/* ······ subpages ······ */
+
+/* Every body of work lives on its own page: one 78rem column opening
+   with its own headroom under the fixed nav. (Photography and the CV
+   use their own variants, .archive and .cv-page, further down.) */
+.page {
   max-width: 78rem;
   margin: 0 auto;
-  padding: 0 var(--pad);
+  padding: clamp(7rem, 16vh, 10rem) var(--pad) var(--section-gap);
 }
 
-/* The middot field (drawn by main.js). It lies over the page from the top
-   edge down into the Apps section — the script sets its height to end where
-   the field has fully dissolved. z-index -1 slips it behind all content;
-   pointer-events none keeps everything selectable and clickable through it. */
-.dot-field {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.hero-kicker {
-  font-size: 0.8125rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-  margin-bottom: 1.25rem;
-}
-
-/* The one accent moment in the hero, echoing the nav's Contact. */
-.hero-dot { color: var(--accent); }
-
-.hero-name {
-  font-size: clamp(3.25rem, 11vw, 8.5rem);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 1.02;
-}
-
-.hero-line {
-  font-size: clamp(1.1875rem, 2.6vw, 1.625rem);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  margin-top: 2rem;
-  max-width: 38ch;
-  line-height: 1.3;
-}
-
-.hero-meta {
-  font-size: 0.8125rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
-  margin-top: 2.75rem;
-}
-
-/* ······ sections ······ */
-
-.section {
-  padding: 0 var(--pad);
-  margin: 0 auto var(--section-gap);
-  max-width: 78rem;
-}
-
-.section-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
+/* Visible only on the CV letterhead now — every other page dropped its
+   visible title, the content speaks for itself. Restrained scale: a
+   clear heading, not a dramatic one. */
 .section-title {
-  font-size: clamp(2.5rem, 6.5vw, 4.75rem);
+  font-size: clamp(1.375rem, 3vw, 1.75rem);
   font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 1;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
-.section-note {
-  color: var(--muted);
-  max-width: 34ch;
-  flex-shrink: 0;
+/* Visually hidden but still reachable by screen readers and search
+   engines: every page keeps exactly one real heading naming it, even
+   though nothing shows on screen. Standard clip-based hiding technique
+   (display:none would remove it from the accessibility tree too). */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Stack the title and its note at 760px (same breakpoint the grids use).
-   Above this they sat side by side, but the note has a fixed width and
-   won't shrink, so on the 600–760px band it squeezed the title and
-   overflowed. */
-@media (max-width: 760px) {
-  .section-head { flex-direction: column; gap: 0.75rem; }
-}
-
-/* Each photo fills the width of its masonry column at its natural shape:
-   width 100% + height auto means the browser keeps the real aspect ratio, so
-   a photo is never cropped. break-inside stops a photo being split across two
-   columns. See .photo-grid below for the column layout. */
+/* Every photo, home and archive alike, keeps its natural shape: width 100%
+   + height auto means the browser keeps the real aspect ratio, so a photo
+   is never cropped. The class is also the lightbox hook (main.js). */
 .photo {
   display: block;
   width: 100%;
-  height: auto;            /* natural aspect ratio — never cropped */
-  margin-bottom: 1rem;     /* vertical gap between photos within a column */
-  break-inside: avoid;     /* never split one photo across two columns */
+  height: auto;
   cursor: zoom-in;
   transition: opacity 0.2s ease;
 }
@@ -235,12 +205,12 @@ a { color: inherit; text-decoration: none; }
 
 .link-accent {
   font-weight: 500;
-  color: var(--accent);
+  color: var(--ink);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
-.link-accent:hover { color: var(--ink); }
+.link-accent:hover { color: var(--ink-soft); }
 
 /* ······ apps ······ */
 
@@ -286,47 +256,61 @@ a { color: inherit; text-decoration: none; }
 }
 
 .app-name {
-  font-size: 1.375rem;
+  font-size: 1.0625rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
-.app-desc { color: var(--muted); margin: 0.5rem 0 1rem; max-width: 40ch; }
+.app-desc { color: var(--ink-soft); margin: 0.5rem 0 1rem; max-width: 40ch; }
 .app-links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.85rem; }
 .app-links a { display: inline-flex; line-height: 0; transition: opacity 0.15s ease; }
 .app-links a:hover { opacity: 0.82; }
 .app-badge { height: 40px; width: auto; display: block; }   /* official App Store badge — unmodified */
 .app-icon { width: 40px; height: 40px; border-radius: 22%; display: block; }  /* app icon, rounded mask */
 
-/* ······ photography ······ */
-
-/* Masonry gallery: photos flow into two balanced columns that pack tight to
-   their content, so there are no leftover gaps and every photo keeps its true
-   shape (the cropping/white-space problems of a row-based grid don't apply).
-   Pure CSS — robust at any screen width, no layout JavaScript. column-gap is
-   the space between columns; each photo's margin-bottom is the space within a
-   column. One column on phones.
-
-   The grid breaks out wider than the 78rem text column for impact: it centres
-   on the viewport at up to 100rem, while the "Photography" heading above stays
-   at text width. width caps just below 100vw so there's never a horizontal
-   scrollbar, and on phones it resolves to the normal padded content width.
-   Centring is done with a negative margin (not a transform) so the grid stays
-   on whole pixels — a transform put it on a half-pixel, which made a faint
-   white seam flash along a photo's edge on hover. */
-.photo-grid {
-  width: min(100rem, 100vw - 2 * var(--pad));
-  margin-left: calc(50% - min(50rem, 50vw - var(--pad)));
-  column-count: 2;
-  column-gap: 1rem;
+/* The site's quiet utility link: plain ink, print-style underline.
+   Used for the Info page's contact lines, among others. */
+.archive-link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
-/* Big screens: a third column, now that the grid breaks out wide enough to
-   carry it without the photos getting small. */
-@media (min-width: 1200px) {
-  .photo-grid { column-count: 3; }
+.archive-link:hover { color: var(--ink-soft); }
+
+/* ······ photography · archive page ······ */
+
+/* One editorial column, opening with its own headroom under the fixed
+   nav (this page has no hero). Narrower than the 78rem text column so
+   a landscape photo reads as a plate, not a banner; every photo is
+   large, natural shape, with a screenful of air between pieces. */
+.archive {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: clamp(7rem, 16vh, 10rem) var(--pad) var(--section-gap);
 }
-@media (max-width: 760px) {
-  .photo-grid { column-count: 1; }
+
+.archive-item { margin-bottom: clamp(4rem, 9vh, 7rem); }
+.archive-item:last-child { margin-bottom: 0; }
+
+/* Small originals (files under ~700px) hold a modest width instead of
+   blowing up to the full column, so they never look soft. */
+.archive-item--small { max-width: 24rem; }
+
+/* Future project groups: each <section class="archive-group"> can take
+   a heading (activate the h2 in the markup) and read as its own
+   chapter, separated by whitespace only — no divider lines, standing
+   rule. A single group renders as one continuous flow, so nothing
+   changes visually until a second group exists. */
+.archive-group + .archive-group {
+  margin-top: calc(var(--section-gap) * 1.5);
+}
+.archive-group-title {
+  font-size: clamp(1.125rem, 2vw, 1.375rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin-bottom: clamp(2.5rem, 5vh, 4rem);
 }
 
 /* ······ music ······ */
@@ -359,11 +343,11 @@ a { color: inherit; text-decoration: none; }
 .project + .project { margin-top: 2.75rem; }
 
 .project-title {
-  font-size: 1.375rem;
+  font-size: 1.0625rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
-.project-desc { color: var(--muted); margin-top: 0.25rem; max-width: 50ch; }
+.project-desc { color: var(--ink-soft); margin-top: 0.25rem; max-width: 50ch; }
 
 .project-side {
   display: flex;
@@ -374,20 +358,20 @@ a { color: inherit; text-decoration: none; }
   text-align: right;
 }
 .project-year {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--muted);
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
 }
 
-.project-pending .project-title { color: var(--muted); }
+.project-pending .project-title { color: var(--ink-soft); }
 
-/* BLHADES wordmark as the project title: the same ink-mask trick the CV
-   logos use, but sized as a wordmark — fixed height, width follows the
-   logo's own proportions. Flips light/dark with --ink. Needs a
-   transparent asset; its alpha channel defines the shape. mask-size:
-   contain means a rough aspect-ratio never distorts the logo — it only
-   adds harmless transparent space on the right. */
+/* A wordmark as a project title: an ink-mask silhouette sized as a
+   wordmark — fixed height, width follows the logo's own proportions
+   (set per logo with --logo-ar / --logo-h inline). Flips light/dark
+   with --ink. Needs a transparent asset; its alpha channel defines the
+   shape. mask-size: contain means a rough aspect-ratio never distorts
+   the logo — it only adds harmless transparent space on the right. */
 .project-logo {
   display: block;
   /* per-logo height; defaults to match the text titles' optical size */
@@ -395,7 +379,7 @@ a { color: inherit; text-decoration: none; }
   /* nudge right ~2px to fake the left side-bearing that the text titles'
      font glyphs have, so the wordmark lines up with them */
   margin-left: 2px;
-  /* per-logo aspect ratio; defaults to the BLHADES wordmark */
+  /* per-logo aspect ratio, set inline on each wordmark */
   aspect-ratio: var(--logo-ar, 1007 / 160);
   background-color: var(--ink);
   -webkit-mask-position: left center;
@@ -424,33 +408,30 @@ a { color: inherit; text-decoration: none; }
 .about-portrait { max-width: 20rem; }
 .about-img { display: block; width: 100%; height: auto; }
 
-.about-text { max-width: 58ch; }
+.about-text { max-width: 62ch; }
 .about-text p + p { margin-top: 1.25rem; }
 
-.about-closing {
-  font-weight: 500;
-  font-size: 1.1875rem;
-  letter-spacing: -0.01em;
+/* ······ cv page ······ */
+
+/* The CV lives on its own page at /cv/, opening with a letterhead (name
+   and contact) so the printed version is self-contained. Same 78rem
+   column the two-column CV grid was designed for. */
+.cv-page {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: clamp(7rem, 16vh, 10rem) var(--pad) var(--section-gap);
 }
 
-/* ······ cv ······ */
+.cv-page-head { margin-bottom: clamp(3rem, 7vh, 5rem); }
 
-/* The CV is its own zone. Recruiters land here directly via the #cv
-   anchor, so a full-bleed tone shift (one step deeper than the paper)
-   marks it as the document within the site — separation by tone and
-   whitespace, no divider lines, per the design principles. */
-.cv-band {
-  background: var(--paper-2);
-  padding: clamp(4rem, 9vh, 6.5rem) var(--pad);
-  /* No margin below: the band meets the footer directly. A paper-colored
-     gap here reads as a stray dark strip in dark mode, where the page
-     background is darker than both the band and the inverted footer. */
+.cv-contact { color: var(--ink-soft); margin-top: 1.25rem; }
+.cv-contact a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
-.cv-band-inner { max-width: 78rem; margin: 0 auto; }
+.cv-contact a:hover { color: var(--ink); }
 
-/* About opens the CV document; a section-sized breath separates the
-   story from the structured part below it. */
-.about-block { margin-bottom: clamp(4.5rem, 10vh, 7rem); }
 
 /* Two columns on wide screens: the story (Experience) beside the facts
    (Education, Skills, Languages, Interests), so the whole CV reads at a
@@ -467,10 +448,10 @@ a { color: inherit; text-decoration: none; }
 .cv-group + .cv-group { margin-top: clamp(3rem, 6vh, 4.5rem); }
 
 .cv-group-title {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--muted);
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
   margin-bottom: 1.75rem;
 }
 
@@ -487,11 +468,8 @@ a { color: inherit; text-decoration: none; }
    (ink fill clipped by a CSS mask) so brand colours never fight the
    palette, and it flips lighter in dark mode like the rest. Needs a
    transparent asset; the alpha channel defines the shape. The
-   mask-image is set inline per entry with a root-relative path.
-   An empty .cv-mark stays invisible but reserves the column, so rows
-   line up even before every logo is in. */
+   mask-image is set inline per entry with a root-relative path. */
 .cv-logo,
-.cv-mark,
 .cv-self {
   flex-shrink: 0;
   width: 1.625rem;
@@ -508,32 +486,33 @@ a { color: inherit; text-decoration: none; }
           mask-repeat: no-repeat;
 }
 
-/* Personal mark for the freelance / own-practice roles: the site's
-   accent icon (rounded square), in the accent colour rather than ink,
-   so they read as "Ale" rather than a company. Flips with the accent
-   in dark mode, like the favicon. */
+/* Personal mark for the freelance / own-practice roles: a small rounded
+   square in ink, same as the company logos, so it reads as "Ale" without
+   introducing colour. */
 .cv-self {
-  background-color: var(--accent);
+  background-color: var(--ink);
   border-radius: 19%;
 }
 
 .cv-main { flex: 1; min-width: 0; }
 
+/* Three quiet levels: the role in ink, the organisation and note in
+   soft ink a step smaller, the year off to the right. */
 .cv-role {
-  font-size: 1.1875rem;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   line-height: 1.3;
 }
-.cv-org { font-weight: 500; margin-top: 0.15rem; }
-.cv-org-note { color: var(--muted); font-weight: 400; }
-.cv-note { color: var(--muted); margin-top: 0.4rem; max-width: 52ch; }
+.cv-org { font-size: 0.875rem; color: var(--ink-soft); margin-top: 0.2rem; }
+.cv-org-note { color: var(--ink-soft); }
+.cv-note { font-size: 0.875rem; color: var(--ink-soft); margin-top: 0.4rem; max-width: 52ch; }
 
 .cv-year {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--muted);
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
   flex-shrink: 0;
   white-space: nowrap;
   margin-left: auto;
@@ -553,8 +532,10 @@ a { color: inherit; text-decoration: none; }
   align-items: baseline;
 }
 .cv-skill-tag {
-  color: var(--accent);
-  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--ink-soft);
 }
 @media (max-width: 420px) {
   .cv-skills-grouped { grid-template-columns: 1fr; row-gap: 0.35rem; }
@@ -565,104 +546,13 @@ a { color: inherit; text-decoration: none; }
   .cv-item { gap: 0.85rem; }
 }
 
-/* ······ contact / footer ······ */
+/* ······ info page ······ */
 
-/* The closing band. It inverts the page — screening-room black under the
-   light theme, paper under the dark theme — so the call to action is the
-   one block that contrasts with everything above it. Full-bleed (a body
-   child with no max-width), with the content held to the section width by
-   .contact-inner. Band-scoped tokens flip in the dark media query below. */
-.contact {
-  --band-bg: #1a1815;
-  --band-fg: #faf8f3;
-  --band-muted: #9c968b;
-  --band-line: #423d35;
-  --band-accent: #e8553d;
-  background: var(--band-bg);
-  color: var(--band-fg);
-  padding: clamp(4rem, 10vh, 7rem) var(--pad);
-}
-@media (prefers-color-scheme: dark) {
-  .contact {
-    --band-bg: #faf8f3;
-    --band-fg: #1a1815;
-    --band-muted: #8a857c;
-    --band-line: #e5e1d6;
-    --band-accent: #d9432b;
-  }
-}
-
-.contact-inner {
-  max-width: 78rem;
-  margin: 0 auto;
-}
-
-.contact-eyebrow {
-  font-size: 0.8125rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--band-muted);
-  margin-bottom: 1.5rem;
-}
-
-/* The page crescendos here: a touch larger than the section titles so the
-   eye finishes on the call to action. The full stop is the one spot of
-   accent in the band. */
-.contact-cta {
-  font-size: clamp(2.5rem, 7vw, 5.25rem);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 1;
-  margin-bottom: clamp(2rem, 5vh, 3rem);
-}
-.contact-dot { color: var(--band-accent); }
-
-.contact-mail {
-  display: inline-block;
-  font-size: clamp(1.375rem, 3.5vw, 2.25rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 5px;
-  text-decoration-color: var(--band-line);
-}
-.contact-mail:hover {
-  color: var(--band-accent);
-  text-decoration-color: var(--band-accent);
-}
-
-.contact-phone {
-  display: block;
-  margin-top: 0.75rem;
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--band-muted);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
-  text-decoration-color: var(--band-line);
-}
-.contact-phone:hover {
-  color: var(--band-accent);
-  text-decoration-color: var(--band-accent);
-}
-
-.contact-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem 2rem;
-  margin-top: 2rem;
-  font-size: 0.9375rem;
-}
-.contact-links a { color: var(--band-muted); text-decoration: underline; text-underline-offset: 3px; }
-.contact-links a:hover { color: var(--band-fg); }
-
-.contact-fine {
-  margin-top: clamp(3rem, 8vh, 5rem);
-  font-size: 0.8125rem;
-  color: var(--band-muted);
+/* The fine print closing the Info page. */
+.about-text .info-fine {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  margin-top: clamp(2.5rem, 5vh, 4rem);
 }
 
 /* ······ lightbox ······ */
@@ -710,7 +600,7 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   font-size: 1.75rem;
   line-height: 1;
-  color: #faf8f3;
+  color: #F7F5F0;
   background: none;
   border: none;
   cursor: pointer;
@@ -722,4 +612,68 @@ a { color: inherit; text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .lightbox { transition: none; }
+}
+
+/* ······ print ······ */
+
+/* "Print to PDF" on the CV page produces a clean A4 document: no nav or
+   footer, black text on white, the two-column layout kept, and no page
+   break inside an individual entry. This block sits last so its token
+   overrides win over the dark scheme when someone prints from dark mode. */
+@media print {
+  @page { size: A4; margin: 15mm 16mm; }
+
+  :root {
+    --ink: #000;
+    --ink-soft: #3a3a3a;
+    --paper: #fff;
+    --paper-warm: #fff;
+    --line: #c8c8c8;
+    color-scheme: light;
+  }
+
+  /* One knob: shrinking the root font scales every rem-based size on the
+     page down to print proportions. */
+  html { font-size: 12px; }
+
+  body { background: #fff; }
+
+  .nav, .lightbox { display: none !important; }
+
+  .cv-page { max-width: none; padding: 0; }
+  .cv-page-head { margin-bottom: 8mm; }
+  .cv-page-head .section-title { font-size: 1.25rem; }
+  .cv-contact { margin-top: 0.5rem; }
+
+  /* Keep the side-by-side document layout: the print viewport is
+     narrower than the 900px screen breakpoint that enables it. */
+  .cv {
+    grid-template-columns: 7fr 5fr;
+    column-gap: 10mm;
+    row-gap: 8mm;
+  }
+  .cv-group + .cv-group { margin-top: 8mm; }
+  .cv-item + .cv-item { margin-top: 5mm; }
+  .cv-group-title { margin-bottom: 4mm; }
+
+  /* Never split one entry across two pages, and keep a group's title
+     with the entries below it. */
+  .cv-item { break-inside: avoid; }
+  .cv-group-title { break-after: avoid; }
+
+  /* The ink-silhouette logos are background colour, which printers skip
+     by default — force them so the marks survive on paper. */
+  .cv-logo, .cv-self {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  /* Links read as plain text on paper; the one external link prints its
+     address after the label so the document stays self-contained. */
+  .cv-page a { color: #000; text-decoration: none; }
+  .cv-main a[href^="https://"]::after {
+    content: " " attr(href);
+    font-size: 0.75rem;
+    color: #3a3a3a;
+  }
 }

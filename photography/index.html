@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ALEJANDRO GÓMEZ</title>
-  <meta name="description" content="Ale Gómez, multidisciplinary creative in Barcelona. Product design, UX and photography: trained in cinema, shipping apps with AI. Open to creative roles in Europe.">
+  <meta name="description" content="Photography by Ale Gómez: Flash Magazine editorial work and portraits.">
   <meta name="theme-color" content="#F7F5F0" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#181613" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -15,26 +15,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=53">
+  <link rel="stylesheet" href="/css/style.css?v=53">
 </head>
 <body>
 
-  <!-- The home page is an index: the name in the same quiet top bar the
-       subpages use (no menu on the right), and the way in below.
-       Every body of work lives on its own page. -->
   <nav class="nav">
     <a href="/" class="nav-name">ALEJANDRO GÓMEZ</a>
-  </nav>
-
-  <main class="index" id="top">
-    <nav class="index-links" aria-label="Sections">
-      <a href="/photography/">Photography</a>
+    <div class="nav-links">
+      <a href="/photography/" aria-current="page">Photography</a>
       <a href="/apps/">Apps</a>
       <a href="/projects/">Projects</a>
       <a href="/cv/">CV</a>
+    </div>
+  </nav>
+
+  <!-- Photography is itself an index now that it holds two bodies of
+       work: reuses the exact .index / .index-links classes the home
+       page defines, so a style change to one applies to both. -->
+  <main class="index">
+    <h1 class="sr-only">Photography</h1>
+    <nav class="index-links" aria-label="Photography">
+      <a href="/photography/flash-magazine/">Flash Magazine</a>
+      <a href="/photography/portraits/">Portraits</a>
     </nav>
   </main>
 
-  <script src="js/main.js?v=53"></script>
+  <script src="/js/main.js?v=53"></script>
 </body>
 </html>
