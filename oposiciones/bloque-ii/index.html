@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ALEJANDRO GÓMEZ</title>
+  <meta name="description" content="Oposiciones TAI — Bloque II: Tecnología básica. Notas de estudio.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v=75">
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-name">ALEJANDRO GÓMEZ URREA</a>
+    <div class="nav-links">
+      <a href="/photography/">Photography</a>
+      <a href="/apps/">Apps</a>
+      <a href="/projects/">Projects</a>
+      <a href="/cv/">CV</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <h1 class="sr-only">Oposiciones — Bloque II</h1>
+
+    <p class="study-intro"><a href="/oposiciones/">&larr; Oposiciones</a></p>
+
+    <div class="study-block">
+      <h2 class="study-block-title">Bloque II &mdash; Tecnolog&iacute;a b&aacute;sica</h2>
+      <p class="study-intro">5 temas. Temario oficial: Anexo V, Resoluci&oacute;n de 18/12/2025 (BOE-A-2025-26262).</p>
+
+      <div class="study-tema" id="tema-1">
+        <h3 class="study-tema-title">Tema 1 &mdash; Arquitectura de ordenadores<span class="study-tema-status">en curso</span></h3>
+        <p>Informática básica, representación y comunicación de la información, arquitectura de ordenadores, componentes internos de los equipos microinformáticos.</p>
+
+        <h4>1. Elementos constitutivos de un sistema de información</h4>
+        <p>Un sistema de información no es solo &laquo;el programa&raquo; &mdash; son cinco piezas que trabajan juntas: <strong>hardware</strong> (los equipos físicos), <strong>software</strong> (los programas), <strong>datos</strong> (la información en sí), <strong>procedimientos</strong> (las normas de uso) y <strong>personas</strong> (usuarios y administradores).</p>
+
+        <h4>2. Representación de la información</h4>
+        <ul>
+          <li><strong>Bit y byte</strong>: bit = unidad mínima (0 o 1); byte = 8 bits. Ojo con la diferencia entre KB decimal (1.000 bytes) y KiB binario (1.024 bytes) &mdash; cae con frecuencia en examen.</li>
+          <li><strong>Sistemas de numeración</strong>: binario (nativo del hardware), octal y hexadecimal (formas compactas de representar binario &mdash; el hex ya se conoce de los colores CSS, cada par de dígitos son 8 bits).</li>
+          <li><strong>Codificación de caracteres</strong>: ASCII (7&ndash;8 bits, alfabeto inglés básico) frente a Unicode/UTF&#8209;8 (longitud variable, cubre todos los alfabetos).</li>
+        </ul>
+
+        <h4>3. Arquitectura de ordenadores &mdash; el modelo de Von Neumann</h4>
+        <ul>
+          <li><strong>CPU</strong>: Unidad de Control (UC) + Unidad Aritmético&#8209;Lógica (ALU) + registros.</li>
+          <li><strong>Memoria principal (RAM)</strong>: volátil, guarda instrucciones y datos mientras el equipo está encendido.</li>
+          <li><strong>Buses</strong>: de datos, de direcciones y de control &mdash; conectan los componentes entre sí.</li>
+          <li><strong>Dispositivos de entrada/salida (E/S)</strong>.</li>
+        </ul>
+
+        <h4>4. Componentes internos de un equipo microinformático</h4>
+        <ul>
+          <li><strong>Placa base</strong> y <strong>chipset</strong> &mdash; conectan y coordinan todos los componentes.</li>
+          <li><strong>Procesador</strong>: núcleos, frecuencia (GHz), caché (L1/L2/L3).</li>
+          <li><strong>Memoria RAM</strong>: tipos actuales (DDR4, DDR5).</li>
+          <li><strong>Almacenamiento</strong>: HDD (mecánico) frente a SSD (electrónico, más rápido).</li>
+          <li><strong>Fuente de alimentación</strong>.</li>
+        </ul>
+
+        <h4>Resumen para repaso rápido</h4>
+        <table class="study-summary">
+          <tr><th>Concepto</th><th>Idea clave</th></tr>
+          <tr><td>Sistema de información</td><td>Hardware + Software + Datos + Procedimientos + Personas</td></tr>
+          <tr><td>KB vs KiB</td><td>Decimal (1.000) vs binario (1.024)</td></tr>
+          <tr><td>Hexadecimal</td><td>Compacta binario, 1 dígito hex = 4 bits</td></tr>
+          <tr><td>Von Neumann</td><td>CPU (UC+ALU+registros) + RAM + Buses + E/S</td></tr>
+          <tr><td>Caché</td><td>Memoria intermedia rápida entre CPU y RAM (L1&rarr;L2&rarr;L3)</td></tr>
+          <tr><td>SSD vs HDD</td><td>Electrónico y rápido vs. mecánico y lento</td></tr>
+        </table>
+
+        <h4>Contraste con el examen real</h4>
+        <p>Pendiente &mdash; próxima sesión: contrastar contra el <a class="link-accent" href="https://sede.inap.gob.es/sites/sede/files/public/2026-05/Cuestionario%20TAI-L-ModeloA.pdf" target="_blank" rel="noopener">Cuestionario Modelo A</a> y el <a class="link-accent" href="https://sede.inap.gob.es/sites/sede/files/public/2026-05/Cuestionario%20TAI-L-ModeloB.pdf" target="_blank" rel="noopener">Modelo B</a> del examen real de mayo 2026.</p>
+      </div>
+
+      <div class="study-tema" id="tema-2">
+        <h3 class="study-tema-title">Tema 2 &mdash; Periféricos<span class="study-tema-status">pendiente</span></h3>
+      </div>
+
+      <div class="study-tema" id="tema-3">
+        <h3 class="study-tema-title">Tema 3 &mdash; Estructuras de datos y ficheros<span class="study-tema-status">pendiente</span></h3>
+      </div>
+
+      <div class="study-tema" id="tema-4">
+        <h3 class="study-tema-title">Tema 4 &mdash; Sistemas operativos<span class="study-tema-status">pendiente</span></h3>
+      </div>
+
+      <div class="study-tema" id="tema-5">
+        <h3 class="study-tema-title">Tema 5 &mdash; Bases de datos (SGBD)<span class="study-tema-status">pendiente</span></h3>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; Ale G&oacute;mez, <span id="year">2026</span></p>
+  </footer>
+
+  <script src="/js/main.js?v=75"></script>
+</body>
+</html>

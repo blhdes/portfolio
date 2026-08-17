@@ -832,3 +832,68 @@ body.fit-screen .site-footer {
     color: #3a3a3a;
   }
 }
+
+/* ······ study (oposiciones) ······
+   The one long-form prose section on the site — study notes, not a
+   curated work sample, so it gets real visible headings and readable
+   body copy instead of the sr-only-title / let-the-work-speak pattern
+   used everywhere else. Public but unlinked from the main nav. */
+
+.study-intro { color: var(--ink-soft); max-width: 62ch; }
+.study-intro + .study-intro { margin-top: 0.75rem; }
+
+.study-block { max-width: 68ch; }
+.study-block + .study-block { margin-top: var(--section-gap); }
+
+.study-block-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.study-tema { margin-top: 2.5rem; }
+.study-tema-title {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.study-tema-status {
+  display: inline-block;
+  margin-left: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.study-tema h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.study-tema p, .study-tema li { color: var(--ink-soft); }
+.study-tema p + p { margin-top: 0.75rem; }
+.study-tema ul, .study-tema ol { margin-top: 0.5rem; padding-left: 1.25em; }
+.study-tema li + li { margin-top: 0.4rem; }
+.study-tema strong { color: var(--ink); font-weight: 600; }
+
+.study-summary {
+  margin-top: 1.5rem;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.study-summary th, .study-summary td {
+  text-align: left;
+  padding: 0.5rem 1rem 0.5rem 0;
+  vertical-align: top;
+}
+.study-summary th { font-weight: 600; color: var(--ink); }
+.study-summary td:first-child, .study-summary th:first-child { font-weight: 500; }
+.study-summary td { color: var(--ink-soft); }
+
+.study-list { list-style: none; }
+.study-list li { display: flex; justify-content: space-between; gap: 1rem; max-width: 68ch; }
+.study-list li + li { margin-top: 0.75rem; }
+.study-list .study-status { color: var(--ink-soft); flex-shrink: 0; }
