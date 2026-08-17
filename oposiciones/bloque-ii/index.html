@@ -35,7 +35,7 @@
       <p class="study-intro">5 temas. Temario oficial: Anexo V, Resoluci&oacute;n de 18/12/2025 (BOE-A-2025-26262).</p>
 
       <div class="study-tema" id="tema-1">
-        <h3 class="study-tema-title">Tema 1 &mdash; Arquitectura de ordenadores<span class="study-tema-status">en curso</span></h3>
+        <h3 class="study-tema-title">Tema 1 &mdash; Arquitectura de ordenadores<span class="study-tema-status">repasado</span></h3>
         <p>Informática básica, representación y comunicación de la información, arquitectura de ordenadores, componentes internos de los equipos microinformáticos.</p>
 
         <h4>1. Elementos constitutivos de un sistema de información</h4>
@@ -44,24 +44,29 @@
         <h4>2. Representación de la información</h4>
         <ul>
           <li><strong>Bit y byte</strong>: bit = unidad mínima (0 o 1); byte = 8 bits. Ojo con la diferencia entre KB decimal (1.000 bytes) y KiB binario (1.024 bytes) &mdash; cae con frecuencia en examen.</li>
-          <li><strong>Sistemas de numeración</strong>: binario (nativo del hardware), octal y hexadecimal (formas compactas de representar binario &mdash; el hex ya se conoce de los colores CSS, cada par de dígitos son 8 bits).</li>
-          <li><strong>Codificación de caracteres</strong>: ASCII (7&ndash;8 bits, alfabeto inglés básico) frente a Unicode/UTF&#8209;8 (longitud variable, cubre todos los alfabetos).</li>
+          <li><strong>Sistemas de numeración</strong>: binario, octal y hexadecimal. <strong>Conversión hex&harr;binario</strong>: cada dígito hex equivale a 4 bits (ej. hex <code>A</code> = binario <code>1010</code>). <strong>Conversión binario&rarr;decimal</strong>: suma de potencias de 2 (ej. <code>1011</code> = 8+0+2+1 = 11).</li>
+          <li><strong>Números negativos &mdash; complemento a dos</strong>: forma estándar de representar enteros negativos en binario; la usan prácticamente todos los procesadores actuales.</li>
+          <li><strong>Coma flotante (IEEE 754)</strong>: representación estándar de números con decimales &mdash; signo + exponente + mantisa; es lo que hay detrás de <code>float</code>/<code>double</code>.</li>
+          <li><strong>Codificación de caracteres</strong>: ASCII (7&ndash;8 bits) frente a Unicode/UTF&#8209;8 (longitud variable, 1 a 4 bytes por carácter).</li>
         </ul>
 
         <h4>3. Arquitectura de ordenadores &mdash; el modelo de Von Neumann</h4>
         <ul>
-          <li><strong>CPU</strong>: Unidad de Control (UC) + Unidad Aritmético&#8209;Lógica (ALU) + registros.</li>
-          <li><strong>Memoria principal (RAM)</strong>: volátil, guarda instrucciones y datos mientras el equipo está encendido.</li>
-          <li><strong>Buses</strong>: de datos, de direcciones y de control &mdash; conectan los componentes entre sí.</li>
+          <li><strong>CPU</strong>: Unidad de Control (UC) + Unidad Aritmético&#8209;Lógica (ALU) + registros, incluyendo <strong>PC</strong> (Program Counter, dirección de la siguiente instrucción) e <strong>IR</strong> (Instruction Register, instrucción en curso).</li>
+          <li><strong>Ciclo de instrucción</strong>: <strong>Fetch</strong> (busca la instrucción en RAM) &rarr; <strong>Decode</strong> (la interpreta) &rarr; <strong>Execute</strong> (la ejecuta).</li>
+          <li><strong>Memoria principal (RAM)</strong>: volátil.</li>
+          <li><strong>Buses</strong>: de datos, de direcciones y de control.</li>
           <li><strong>Dispositivos de entrada/salida (E/S)</strong>.</li>
+          <li><strong>Von Neumann vs. Harvard</strong>: Von Neumann comparte una única memoria para datos e instrucciones; Harvard las separa (microcontroladores, no PCs de propósito general).</li>
         </ul>
 
         <h4>4. Componentes internos de un equipo microinformático</h4>
         <ul>
-          <li><strong>Placa base</strong> y <strong>chipset</strong> &mdash; conectan y coordinan todos los componentes.</li>
-          <li><strong>Procesador</strong>: núcleos, frecuencia (GHz), caché (L1/L2/L3).</li>
+          <li><strong>Placa base</strong> y <strong>chipset</strong>.</li>
+          <li><strong>Procesador</strong>: núcleos, frecuencia (GHz), y jerarquía de <strong>caché</strong>: <strong>L1</strong> (dentro de cada núcleo, la más rápida y pequeña) &rarr; <strong>L2</strong> (por núcleo o compartida entre pares) &rarr; <strong>L3</strong> (compartida entre todos los núcleos, la más grande y lenta de las tres).</li>
           <li><strong>Memoria RAM</strong>: tipos actuales (DDR4, DDR5).</li>
-          <li><strong>Almacenamiento</strong>: HDD (mecánico) frente a SSD (electrónico, más rápido).</li>
+          <li><strong>Almacenamiento</strong>: <strong>SSD</strong> (memoria no volátil, sin partes móviles) frente a <strong>HDD</strong> (mecánico, cabezales y discos giratorios). <strong>RAID</strong> (técnicamente Bloque IV, pero mezclado en el examen real): RAID&nbsp;0 reparte sin redundancia, RAID&nbsp;1 duplica (tolera 1 fallo), <strong>RAID&nbsp;5 reparte + paridad, tolera exactamente 1 fallo de disco</strong>, RAID&nbsp;10 combina ambos.</li>
+          <li><strong>Puertos, con cifras reales</strong>: USB 2.0 = 480&nbsp;Mbps &middot; 3.0 = 5&nbsp;Gbps &middot; 3.2 = 20&nbsp;Gbps &middot; USB4 = 40&nbsp;Gbps &middot; <strong>HDMI 2.1 = 48&nbsp;Gbps</strong> &middot; SATA III = 6&nbsp;Gbps.</li>
           <li><strong>Fuente de alimentación</strong>.</li>
         </ul>
 
@@ -70,14 +75,18 @@
           <tr><th>Concepto</th><th>Idea clave</th></tr>
           <tr><td>Sistema de información</td><td>Hardware + Software + Datos + Procedimientos + Personas</td></tr>
           <tr><td>KB vs KiB</td><td>Decimal (1.000) vs binario (1.024)</td></tr>
-          <tr><td>Hexadecimal</td><td>Compacta binario, 1 dígito hex = 4 bits</td></tr>
-          <tr><td>Von Neumann</td><td>CPU (UC+ALU+registros) + RAM + Buses + E/S</td></tr>
-          <tr><td>Caché</td><td>Memoria intermedia rápida entre CPU y RAM (L1&rarr;L2&rarr;L3)</td></tr>
-          <tr><td>SSD vs HDD</td><td>Electrónico y rápido vs. mecánico y lento</td></tr>
+          <tr><td>Hexadecimal</td><td>1 dígito hex = 4 bits</td></tr>
+          <tr><td>Complemento a dos</td><td>Representación estándar de enteros negativos</td></tr>
+          <tr><td>IEEE 754</td><td>Estándar de coma flotante</td></tr>
+          <tr><td>Ciclo de instrucción</td><td>Fetch &rarr; Decode &rarr; Execute</td></tr>
+          <tr><td>Caché L1/L2/L3</td><td>L1 dentro del núcleo (rápida, pequeña) &rarr; L3 compartida (lenta, grande)</td></tr>
+          <tr><td>SSD vs HDD</td><td>No volátil sin partes móviles vs. mecánico</td></tr>
+          <tr><td>RAID 5</td><td>Tolera 1 fallo de disco</td></tr>
+          <tr><td>HDMI 2.1</td><td>48 Gbps máximo</td></tr>
         </table>
 
-        <h4>Contraste con el examen real</h4>
-        <p>Pendiente &mdash; próxima sesión: contrastar contra el <a class="link-accent" href="https://sede.inap.gob.es/sites/sede/files/public/2026-05/Cuestionario%20TAI-L-ModeloA.pdf" target="_blank" rel="noopener">Cuestionario Modelo A</a> y el <a class="link-accent" href="https://sede.inap.gob.es/sites/sede/files/public/2026-05/Cuestionario%20TAI-L-ModeloB.pdf" target="_blank" rel="noopener">Modelo B</a> del examen real de mayo 2026.</p>
+        <h4>Contraste con el examen real &mdash; hecho</h4>
+        <p>Del <a class="link-accent" href="https://sede.inap.gob.es/sites/sede/files/public/2026-05/Cuestionario%20TAI-L-ModeloA.pdf" target="_blank" rel="noopener">Cuestionario Modelo A</a> (examen real, mayo 2026), preguntas 23&ndash;27 caen sobre este tema: caché L1 (P23), función del bus (P24, acierto directo), características SSD (P25), ancho de banda HDMI 2.1 (P26) y tolerancia RAID 5 (P27). <strong>Resultado: 3 de 5 con la versión introducción, 5 de 5 con esta ampliación.</strong> El examen premia el dato exacto, no solo el concepto &mdash; por eso el contenido ya se estudia completo desde la primera pasada.</p>
       </div>
 
       <div class="study-tema" id="tema-2">
