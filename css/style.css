@@ -161,12 +161,24 @@ a { color: inherit; text-decoration: none; }
      1fr lets the whole nav (masthead row and links row alike) span the
      full bar instead, giving the links real breathing room. */
   .nav { grid-template-columns: 1fr; gap: 0.65rem; padding: 1.25rem var(--pad); }
+  /* space-between (desktop) stretches the links across whatever width
+     it's given — fine when that width is the masthead's own compact
+     size, but on phone the column is full-bleed (see above), so
+     space-between would fling the links edge to edge across the whole
+     screen, far past where the masthead text actually ends. A fixed
+     gap keeps the links sitting together, left-aligned under the
+     masthead's own start, so the row reads as roughly the masthead's
+     width instead of the full bar's. */
+  .nav-links { justify-content: flex-start; gap: 1.25rem; }
   /* Even at full width, real device font metrics (SF Mono vs. JetBrains
      Mono) or a visitor's own text-size setting could still in theory
      push four links past one line. flex-wrap keeps that safe: a link
      that doesn't fit drops to a second line instead of disappearing
-     into the hidden-scrollbar fallback below. */
-  .nav-links { flex-wrap: wrap; row-gap: 0.5rem; }
+     into the hidden-scrollbar fallback below — which is why that
+     fallback (overflow-x: auto, set for desktop) is switched off here:
+     the two can't both be active, since a scrollable axis stops the
+     browser from ever wrapping onto it in the first place. */
+  .nav-links { flex-wrap: wrap; row-gap: 0.5rem; overflow-x: visible; }
   /* The nav has no background of its own and stays fixed on desktop by
      design: scrolled content is meant to show through behind it. On a
      phone that reads as broken rather than deliberate — the
