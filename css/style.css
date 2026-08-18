@@ -19,8 +19,8 @@
   --pad: clamp(1.25rem, 5vw, 4rem);
   --section-gap: clamp(5.5rem, 10vh, 9rem);
   /* Headroom every page reserves at the top for the nav to float over.
-     Shrinks on mobile once the nav scrolls with the page instead of
-     staying fixed above it — see the nav's own mobile media query. */
+     Shrinks a little on mobile, where the fixed nav itself is shorter
+     — see the nav's own mobile media query. */
   --nav-clearance: clamp(7.5rem, 16vh, 10rem);
   color-scheme: light dark;
 }
@@ -102,8 +102,7 @@ a { color: inherit; text-decoration: none; }
   background: linear-gradient(var(--paper) 75%, transparent);
   pointer-events: none;
 }
-.nav * { pointer-events: auto;
-}
+.nav * { pointer-events: auto; }
 
 /* The site's one real masthead — reference: biancacensori.com, where
    the site name reads noticeably larger than the nav links below it,
@@ -186,7 +185,15 @@ a { color: inherit; text-decoration: none; }
 .lang-switch span { color: var(--line); }
 
 @media (max-width: 600px) {
-  .nav { gap: 0.65rem; padding: 1.25rem var(--pad); }
+  /* The nav stays fixed on phone too. It used to go static here:
+     with no background of its own, a fixed bar on a phone read as
+     broken — masthead text visibly overlapping whatever scrolled
+     past underneath. Now that the nav carries the paper-to-
+     transparent gradient, the desktop treatment works everywhere:
+     content fades out under the masthead instead of colliding with
+     it. Bottom padding stays generous — it's the gradient's fade
+     zone. */
+  .nav { gap: 0.65rem; padding: 1.25rem var(--pad) 1.75rem; }
   /* The links row spans exactly the masthead's width on phone too,
      first and last link flush with its edges — the same treatment as
      desktop (grid-template-columns: max-content + the width: 0 /
@@ -209,23 +216,6 @@ a { color: inherit; text-decoration: none; }
      the two can't both be active, since a scrollable axis stops the
      browser from ever wrapping onto it in the first place. */
   .nav-links { flex-wrap: wrap; row-gap: 0.5rem; overflow-x: visible; }
-  /* The nav has no background of its own and stays fixed on desktop by
-     design: scrolled content is meant to show through behind it. On a
-     phone that reads as broken rather than deliberate — the
-     masthead/links text visibly overlaps whatever's scrolling past
-     underneath it. Letting the nav scroll away with the page avoids
-     that entirely. flex-shrink: 0 keeps it
-     at its natural height inside body.fit-screen's flex column (home,
-     the Photography index, Portraits), where it's now a normal flex
-     item alongside main and the footer instead of floating outside
-     the layout. --nav-clearance — the shared top padding every page's
-     main content uses (see .index/.page/.archive/.cv-page) — existed
-     purely to reserve room for the fixed nav to float over; once the
-     nav sits in normal flow it only needs a little breathing room
-     below its own real height. scroll-padding-top shrinks to match,
-     since there's no floating bar left to clear when jumping to an
-     anchor. */
-  .nav { position: static; flex-shrink: 0; background: none; padding-bottom: 0; pointer-events: auto; }
   /* On phone the switch leaves the masthead block entirely and sits in
      normal flow just above the copyright line: there's no room at the
      bar's right edge (the masthead can run close to full width), and a
@@ -234,8 +224,8 @@ a { color: inherit; text-decoration: none; }
      In flow rather than pinned to the viewport, on purpose. Fixing it
      to the screen would keep it permanently visible, but the switch has
      no background of its own, so it would sit as floating text over
-     whatever scrolls underneath — the exact problem that took the nav
-     off position: fixed on mobile further up. Living in the footer
+     whatever scrolls underneath, outside the nav's gradient that
+     protects the masthead. Living in the footer
      means it lands at the true bottom of the screen on pages that fit
      one (home, the photography index, portraits, 404) and at the end of
      the content on pages that scroll.
@@ -245,8 +235,11 @@ a { color: inherit; text-decoration: none; }
     justify-content: center;
     margin: 0 0 0.9rem;
   }
-  :root { --nav-clearance: clamp(2rem, 6vh, 3rem); }
-  html { scroll-padding-top: 1rem; }
+  /* The fixed nav is a little shorter on phone (tighter padding,
+     smaller type), so the headroom pages reserve for it shrinks to
+     match — enough to clear even a two-line links row. */
+  :root { --nav-clearance: clamp(6.5rem, 14vh, 8rem); }
+  html { scroll-padding-top: 6.5rem; }
 }
 
 /* ······ home index ······ */
