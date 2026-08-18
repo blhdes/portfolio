@@ -600,7 +600,16 @@ body.fit-screen .site-footer {
 }
 .cv-name-print { display: none; }
 
-.cv-tagline { color: var(--ink-soft); margin-top: 0.75rem; font-style: italic; }
+/* The bio reads as a paragraph, not a headline: capped at a comfortable
+   measure so it wraps into a few short lines instead of one very long
+   one running the full width of the page. Same treatment as .cv-note
+   below. */
+.cv-tagline {
+  color: var(--ink-soft);
+  margin-top: 0.75rem;
+  max-width: 52ch;
+  font-style: italic;
+}
 
 .cv-contact { color: var(--ink-soft); margin-top: 1.25rem; }
 .cv-contact a {
