@@ -2,8 +2,8 @@
    Ale Gómez · portfolio
    Minimal editorial: pure white, near-black ink, neutral greys — no
    warm undertone anywhere, the photographs are the only colour on the
-   site. One typeface throughout — SF Mono on Apple devices (the real
-   system font, via ui-monospace), JetBrains Mono everywhere else —
+   site. One typeface throughout — Helvetica (Helvetica Neue on Apple
+   devices, Arial as the metric-compatible fallback elsewhere) —
    hierarchy comes from weight and size, not a second display face.
    The home page is a bare index — name and links — and every body of
    work lives on its own page. No animations, no effects.
@@ -15,7 +15,7 @@
   --paper: #FFFFFF;
   --paper-warm: #F2F2F2;   /* one tone deeper: the CV band */
   --line: #E0E0E0;
-  --font-body: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Consolas, monospace;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --pad: clamp(1.25rem, 5vw, 4rem);
   --section-gap: clamp(5.5rem, 10vh, 9rem);
   /* Headroom every page reserves at the top for the nav to float over.
@@ -193,21 +193,14 @@ a { color: inherit; text-decoration: none; }
      min-width: 100% pair, see .nav-links above), rather than a
      separate full-bleed layout that visibly overruns the masthead's
      right edge.
-     Making that fit is a real geometric squeeze: the four links total
-     ~25 characters and have to sit inside a masthead only 21
-     characters wide, whose font is pinned at its clamp() minimum
-     here. Left alone they fill the row almost exactly, leaving ~1.4px
-     between words — legible size, unreadable spacing.
-     The width therefore has to come from the masthead, and it comes
-     from tracking rather than size: the font stays exactly as tuned
-     and only the letter-spacing opens up (0.01em -> 0.09em), which
-     widens the row by ~28px. That buys the links their full 0.875rem
-     back with ~11px between them. Tracked-out caps also happens to
-     suit an editorial masthead, so this reads as intent, not a
-     workaround. Measured, not estimated — scripts/check-layout.sh
-     verifies the row stays flush. */
+     The tracking below dates from the monospace era, when the four
+     links (~25 characters) had to fit inside a masthead only 21
+     characters wide and the extra letter-spacing bought them the room.
+     On a proportional face the squeeze is gone, but tracked-out caps
+     suit an editorial masthead, so it stays as a design choice.
+     scripts/check-layout.sh verifies the row stays flush. */
   .nav-name { letter-spacing: 0.09em; }
-  /* Real device font metrics (SF Mono vs. JetBrains Mono) or a
+  /* Real device font metrics (Helvetica Neue vs. Arial) or a
      visitor's own text-size setting could still in theory
      push four links past one line. flex-wrap keeps that safe: a link
      that doesn't fit drops to a second line instead of disappearing
@@ -702,9 +695,9 @@ body.fit-screen .site-footer {
    role is bigger and properly bold (700, the heaviest weight loaded)
    instead of a middling 600, the organisation gets its own medium
    weight rather than blending into the note below it, and both get a
-   little more breathing room. letter-spacing stays neutral — negative
-   tracking (fine on a proportional face) reads cramped on a monospace
-   one, where every character is already fixed-width. */
+   little more breathing room. letter-spacing stays neutral for now;
+   on Helvetica a touch of negative tracking on the bigger sizes is an
+   option, unlike on the monospace face this design started with. */
 .cv-role {
   font-size: 1.125rem;
   font-weight: 700;
