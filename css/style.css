@@ -618,12 +618,20 @@ body.fit-screen .site-footer {
 
 .cv-contact-email { display: none; }
 
+.cv-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
 .cv-contact-btn {
   position: relative;
-  display: block;
-  margin-top: 1.5rem;
   font: inherit;
   font-size: 0.875rem;
+  font-style: italic;
   color: var(--ink);
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -636,12 +644,8 @@ body.fit-screen .site-footer {
   inset: -0.5rem;
 }
 
-/* The print trigger: a button dressed as a quiet link, same voice as
-   .archive-link. Hidden on paper — see @media print below. */
 .cv-print {
   position: relative;
-  display: block;
-  margin-top: 1.5rem;
   padding: 0;
   font: inherit;
   font-size: 0.875rem;
@@ -742,6 +746,7 @@ body.fit-screen .site-footer {
 }
 
 .cv-skills { max-width: 60ch; }
+.cv-skills + .cv-skills { margin-top: 0.75rem; }
 
 /* Skills grouped into pillars: a small accent label, then the skills, in
    a two-column grid so every label aligns. Shows the cross-disciplinary
@@ -874,7 +879,7 @@ body.fit-screen .site-footer {
   /* .lang-switch is listed explicitly: it used to sit inside .nav and
      was hidden along with it, but its markup now lives in the footer
      (or, on this page, at the end of the CV itself). */
-  .nav, .lightbox, .cv-print, .cv-contact-btn, .lang-switch { display: none !important; }
+  .nav, .lightbox, .cv-actions, .lang-switch { display: none !important; }
   .cv-contact-email { display: block; margin-top: 0.25rem; }
 
   .cv-page { max-width: none; padding: 0; }
