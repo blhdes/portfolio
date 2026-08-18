@@ -99,6 +99,15 @@ a { color: inherit; text-decoration: none; }
   padding: 1.5rem var(--pad);
   font-size: 0.875rem;
 }
+.nav::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 100%;
+  height: 3rem;
+  background: linear-gradient(var(--paper), transparent);
+  pointer-events: none;
+}
 
 /* The site's one real masthead — reference: biancacensori.com, where
    the site name reads noticeably larger than the nav links below it,
@@ -228,6 +237,7 @@ a { color: inherit; text-decoration: none; }
      since there's no floating bar left to clear when jumping to an
      anchor. */
   .nav { position: static; flex-shrink: 0; }
+  .nav::after { display: none; }
   /* On phone the switch leaves the masthead block entirely and sits in
      normal flow just above the copyright line: there's no room at the
      bar's right edge (the masthead can run close to full width), and a
