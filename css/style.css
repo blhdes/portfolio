@@ -151,27 +151,46 @@ a { color: inherit; text-decoration: none; }
   font-weight: 600;
 }
 
+/* ······ language switch ······ */
+
+/* A minimal EN | ES control pinned to the bar's right edge on desktop
+   — independent of the name/links block, which stays left-aligned
+   (see .nav-links' width-matching comment above). .nav is fixed and
+   spans the full bar even though its grid content doesn't, so it's
+   already a valid containing block for this. */
+.lang-switch {
+  position: absolute;
+  top: 1.5rem;
+  right: var(--pad);
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.lang-switch a { color: var(--ink-soft); }
+.lang-switch a:hover { color: var(--ink); }
+.lang-switch a[aria-current="true"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+.lang-switch span { color: var(--line); }
+
 @media (max-width: 600px) {
-  /* On desktop the nav is deliberately only as wide as the masthead
-     text (grid-template-columns: max-content above), with the links
-     row stretched to match that exact width — see .nav-links' comment.
-     On phone that width is small (the masthead font sits near its
-     clamp() minimum) and four links have to share it, so they end up
-     packed edge to edge with barely any gap. Switching the column to
-     1fr lets the whole nav (masthead row and links row alike) span the
-     full bar instead, giving the links real breathing room. */
-  .nav { grid-template-columns: 1fr; gap: 0.65rem; padding: 1.25rem var(--pad); }
-  /* space-between (desktop) stretches the links across whatever width
-     it's given — fine when that width is the masthead's own compact
-     size, but on phone the column is full-bleed (see above), so
-     space-between would fling the links edge to edge across the whole
-     screen, far past where the masthead text actually ends. A fixed
-     gap keeps the links sitting together, left-aligned under the
-     masthead's own start, so the row reads as roughly the masthead's
-     width instead of the full bar's. */
-  .nav-links { justify-content: flex-start; gap: 1.25rem; }
-  /* Even at full width, real device font metrics (SF Mono vs. JetBrains
-     Mono) or a visitor's own text-size setting could still in theory
+  .nav { gap: 0.65rem; padding: 1.25rem var(--pad); }
+  /* The links row spans exactly the masthead's width on phone too,
+     first and last link flush with its edges — the same treatment as
+     desktop (grid-template-columns: max-content + the width: 0 /
+     min-width: 100% pair, see .nav-links above), rather than a
+     separate full-bleed layout that visibly overruns the masthead's
+     right edge. What makes it fit at this size is the smaller link
+     text below: the masthead font sits at its clamp() minimum here,
+     so at the inherited 0.875rem the four links alone measure about
+     as wide as the masthead itself, leaving no gap between them to
+     distribute. Stepping them down opens that space back up. */
+  .nav-links { font-size: 0.75rem; }
+  /* Real device font metrics (SF Mono vs. JetBrains Mono) or a
+     visitor's own text-size setting could still in theory
      push four links past one line. flex-wrap keeps that safe: a link
      that doesn't fit drops to a second line instead of disappearing
      into the hidden-scrollbar fallback below — which is why that
@@ -196,6 +215,13 @@ a { color: inherit; text-decoration: none; }
      since there's no floating bar left to clear when jumping to an
      anchor. */
   .nav { position: static; flex-shrink: 0; }
+  /* No room at the bar's right edge on phone (the masthead can run
+     close to full width), so the switch drops out of the corner and
+     becomes a third quiet row under the section links instead — once
+     static it's just another item in .nav's grid, landing in its own
+     auto row. It's narrower than the masthead, so it doesn't affect
+     the column's max-content width the links row is matched to. */
+  .lang-switch { position: static; margin-top: 0.15rem; }
   :root { --nav-clearance: clamp(2rem, 6vh, 3rem); }
   html { scroll-padding-top: 1rem; }
 }
