@@ -609,7 +609,7 @@ body.fit-screen .site-footer {
 }
 .cv-name-print { display: none; }
 
-.cv-tagline { color: var(--ink-soft); margin-top: 0.75rem; max-width: 52ch; font-style: italic; }
+.cv-tagline { color: var(--ink-soft); margin-top: 0.75rem; font-style: italic; }
 
 .cv-contact { color: var(--ink-soft); margin-top: 1.25rem; }
 .cv-contact a {
