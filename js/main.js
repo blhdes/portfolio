@@ -17,11 +17,6 @@ if (moved[location.hash] && !document.querySelector(location.hash)) {
 const yearEl = document.getElementById("year");
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// The CV page's "Download PDF" is the browser's own print dialog:
-// print-to-PDF gives a clean document via the @media print styles.
-const printCv = document.getElementById("print-cv");
-if (printCv) printCv.addEventListener("click", () => window.print());
-
 // ······ casual image protection ······
 // Block right-click "Save Image As" and drag-to-save on every <img> (delegated
 // on document, so it also covers the lightbox image added at runtime). This is
