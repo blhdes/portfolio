@@ -183,12 +183,21 @@ a { color: inherit; text-decoration: none; }
      desktop (grid-template-columns: max-content + the width: 0 /
      min-width: 100% pair, see .nav-links above), rather than a
      separate full-bleed layout that visibly overruns the masthead's
-     right edge. What makes it fit at this size is the smaller link
-     text below: the masthead font sits at its clamp() minimum here,
-     so at the inherited 0.875rem the four links alone measure about
-     as wide as the masthead itself, leaving no gap between them to
-     distribute. Stepping them down opens that space back up. */
-  .nav-links { font-size: 0.75rem; }
+     right edge.
+     Making that fit is a real geometric squeeze: the four links total
+     ~25 characters and have to sit inside a masthead only 21
+     characters wide, whose font is pinned at its clamp() minimum
+     here. Left alone they fill the row almost exactly, leaving ~1.4px
+     between words — legible size, unreadable spacing.
+     The width therefore has to come from the masthead, and it comes
+     from tracking rather than size: the font stays exactly as tuned
+     and only the letter-spacing opens up (0.01em -> 0.09em), which
+     widens the row by ~28px. That buys the links their full 0.875rem
+     back with ~11px between them. Tracked-out caps also happens to
+     suit an editorial masthead, so this reads as intent, not a
+     workaround. Measured, not estimated — scripts/check-layout.sh
+     verifies the row stays flush. */
+  .nav-name { letter-spacing: 0.09em; }
   /* Real device font metrics (SF Mono vs. JetBrains Mono) or a
      visitor's own text-size setting could still in theory
      push four links past one line. flex-wrap keeps that safe: a link
