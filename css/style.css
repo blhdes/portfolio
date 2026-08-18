@@ -616,6 +616,26 @@ body.fit-screen .site-footer {
 }
 .cv-contact a:hover { color: var(--ink); }
 
+.cv-contact-email { display: none; }
+
+.cv-contact-btn {
+  position: relative;
+  display: block;
+  margin-top: 1.5rem;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.cv-contact-btn:hover { color: var(--ink-soft); }
+.cv-contact-btn::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+}
+
 /* The print trigger: a button dressed as a quiet link, same voice as
    .archive-link. Hidden on paper — see @media print below. */
 .cv-print {
@@ -854,7 +874,8 @@ body.fit-screen .site-footer {
   /* .lang-switch is listed explicitly: it used to sit inside .nav and
      was hidden along with it, but its markup now lives in the footer
      (or, on this page, at the end of the CV itself). */
-  .nav, .lightbox, .cv-print, .lang-switch { display: none !important; }
+  .nav, .lightbox, .cv-print, .cv-contact-btn, .lang-switch { display: none !important; }
+  .cv-contact-email { display: block; margin-top: 0.25rem; }
 
   .cv-page { max-width: none; padding: 0; }
   .cv-page-head { margin-bottom: 8mm; }
