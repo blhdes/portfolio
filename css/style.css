@@ -647,28 +647,12 @@ body.fit-screen .site-footer {
   inset: -0.5rem;
 }
 
-.cv-print {
-  position: relative;
-  padding: 0;
-  font: inherit;
-  font-size: 0.875rem;
-  background: none;
-  border: none;
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-.cv-print:hover { color: var(--ink-soft); }
-
-/* These three are the site's smallest tap targets on phone: plain text
-   links/buttons with no padding of their own, well under the ~44px a
-   thumb needs. An absolutely-positioned, invisible ::after widens the
-   hit area without changing the visible size or shifting layout. */
+/* These two are the site's smallest tap targets on phone: plain text
+   links with no padding of their own, well under the ~44px a thumb
+   needs. An absolutely-positioned, invisible ::after widens the hit
+   area without changing the visible size or shifting layout. */
 .nav-links a::after,
-.index-links a::after,
-.cv-print::after {
+.index-links a::after {
   content: "";
   position: absolute;
   inset: -0.5rem;
