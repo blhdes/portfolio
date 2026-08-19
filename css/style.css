@@ -2,9 +2,10 @@
    Ale Gómez · portfolio
    Minimal editorial: pure white, near-black ink, neutral greys — no
    warm undertone anywhere, the photographs are the only colour on the
-   site. One typeface throughout — Helvetica (Helvetica Neue on Apple
-   devices, Arial as the metric-compatible fallback elsewhere) —
-   hierarchy comes from weight and size, not a second display face.
+   site. One typeface throughout — Helvetica Neue, served as a real
+   web font via Adobe Fonts so every OS renders the same file, no
+   fallback — hierarchy comes from weight and size, not a second
+   display face.
    The home page is a bare index — name and links — and every body of
    work lives on its own page. No animations, no effects.
    ································································ */
@@ -15,7 +16,7 @@
   --paper: #FFFFFF;
   --paper-warm: #F2F2F2;   /* one tone deeper: the CV band */
   --line: #E0E0E0;
-  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "helvetica-neue-lt-pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --pad: clamp(1.25rem, 5vw, 4rem);
   --section-gap: clamp(5.5rem, 10vh, 9rem);
   /* Headroom every page reserves at the top for the nav to float over.
@@ -152,7 +153,7 @@ a { color: inherit; text-decoration: none; }
    aria-current="page" in the HTML, already present on every subpage. */
 .nav-links a[aria-current="page"] {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* ······ language switch ······ */
@@ -180,7 +181,7 @@ a { color: inherit; text-decoration: none; }
 .lang-switch a:hover { color: var(--ink); }
 .lang-switch a[aria-current="true"] {
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
 }
 .lang-switch span { color: var(--line); }
 
@@ -207,8 +208,7 @@ a { color: inherit; text-decoration: none; }
      suit an editorial masthead, so it stays as a design choice.
      scripts/check-layout.sh verifies the row stays flush. */
   .nav-name { letter-spacing: 0.09em; }
-  /* Real device font metrics (Helvetica Neue vs. Arial) or a
-     visitor's own text-size setting could still in theory
+  /* A visitor's own text-size setting could still in theory
      push four links past one line. flex-wrap keeps that safe: a link
      that doesn't fit drops to a second line instead of disappearing
      into the hidden-scrollbar fallback below — which is why that
@@ -336,7 +336,7 @@ body.fit-screen .site-footer {
    clear heading, not a dramatic one. */
 .section-title {
   font-size: clamp(1.375rem, 3vw, 1.75rem);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
@@ -426,7 +426,7 @@ body.fit-screen .site-footer {
 
 .app-name {
   font-size: 1.0625rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 
@@ -480,7 +480,7 @@ body.fit-screen .site-footer {
 }
 .archive-group-title {
   font-size: clamp(1.125rem, 2vw, 1.375rem);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.2;
   margin-bottom: clamp(2.5rem, 5vh, 4rem);
@@ -517,7 +517,7 @@ body.fit-screen .site-footer {
 
 .project-title {
   font-size: 1.0625rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 .project-desc { color: var(--ink-soft); margin-top: 0.25rem; max-width: 50ch; }
@@ -914,7 +914,7 @@ body.fit-screen .site-footer {
 
 .study-block-title {
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
   line-height: 1.2;
 }
@@ -922,7 +922,7 @@ body.fit-screen .site-footer {
 .study-tema { margin-top: 2.5rem; }
 .study-tema-title {
   font-size: 1.0625rem;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.01em;
 }
 .study-tema-status {
@@ -935,7 +935,7 @@ body.fit-screen .site-footer {
 
 .study-tema h4 {
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 500;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
 }
@@ -943,7 +943,7 @@ body.fit-screen .site-footer {
 .study-tema p + p { margin-top: 0.75rem; }
 .study-tema ul, .study-tema ol { margin-top: 0.5rem; padding-left: 1.25em; }
 .study-tema li + li { margin-top: 0.4rem; }
-.study-tema strong { color: var(--ink); font-weight: 600; }
+.study-tema strong { color: var(--ink); font-weight: 500; }
 
 .study-summary {
   margin-top: 1.5rem;
@@ -956,7 +956,7 @@ body.fit-screen .site-footer {
   padding: 0.5rem 1rem 0.5rem 0;
   vertical-align: top;
 }
-.study-summary th { font-weight: 600; color: var(--ink); }
+.study-summary th { font-weight: 500; color: var(--ink); }
 .study-summary td:first-child, .study-summary th:first-child { font-weight: 500; }
 .study-summary td { color: var(--ink-soft); }
 
