@@ -27,7 +27,7 @@
        (including Windows) renders the exact same file, no fallback. -->
   <link rel="preconnect" href="https://use.typekit.net" crossorigin>
   <link rel="stylesheet" href="https://use.typekit.net/pbq8oze.css">
-  <link rel="stylesheet" href="/css/style.css?v=88">
+  <link rel="stylesheet" href="/css/style.css?v=89">
 </head>
 <body>
 
@@ -45,7 +45,10 @@
        clean A4 document, nav hidden (see @media print in style.css).
        The letterhead keeps the printout self-contained.
        Content follows the designed PDF CV (~/Claude/cv/cv-en.html),
-       minus the phone number, which stays off the public site. -->
+       minus the phone number, which stays off the public site.
+       The download links point to /cv/*.pdf, the designed PDF CV built
+       without private lines: ./build.sh en-public es-public ca-public
+       in ~/Claude/cv, then copy public/*.pdf here. -->
   <main class="cv-page">
     <header class="cv-page-head">
       <h1 class="cv-name-print">Alejandro G&oacute;mez Urrea</h1>
@@ -55,6 +58,7 @@
       <p class="cv-actions">
         <a class="cv-contact-btn" href="mailto:agomezurrea@gmail.com">Contact</a>
         <a class="cv-contact-btn" href="https://github.com/blhdes" target="_blank" rel="noopener">GitHub</a>
+        <a class="cv-contact-btn" href="/cv/Alejandro-Gomez-Urrea-CV-EN.pdf" download>Download PDF</a>
       </p>
     </header>
 
@@ -272,6 +276,6 @@
     <p>&copy; Alejandro G&oacute;mez, <span id="year">2026</span></p>
   </footer>
 
-  <script src="/js/main.js?v=80"></script>
+  <script src="/js/main.js?v=81"></script>
 </body>
 </html>

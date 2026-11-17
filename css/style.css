@@ -621,10 +621,14 @@ body.fit-screen .site-footer {
 
 .cv-contact-email { display: none; }
 
+/* Contact, GitHub and the PDF download. The gap is wider than each
+   link's invisible 0.5rem tap padding on both sides (see
+   .cv-contact-btn::after), so neighbouring tap areas never overlap. */
 .cv-actions {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.75rem 1.25rem;
   margin-top: 1.5rem;
   font-size: 0.875rem;
   color: var(--ink-soft);
