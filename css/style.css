@@ -756,6 +756,42 @@ body.fit-screen .site-footer {
   .cv-skill-tag { margin-top: 0.85rem; }
 }
 
+/* Skills with tool marks, the same set the PDF CV carries: a small
+   label, then each tool as mark + name in two even columns, then the
+   tools that have no official logo as a quiet line of text. The marks
+   are the official monochrome files (black); the dark theme flips
+   them to white with invert() so they always match the ink. */
+.cv-stack-group + .cv-stack-group { margin-top: 1.75rem; }
+.cv-stack-group .cv-skill-tag { display: block; margin-bottom: 0.85rem; }
+.cv-stack {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem 1rem;
+}
+.cv-stack li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+.cv-stack img {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  opacity: 0.85;
+}
+@media (prefers-color-scheme: dark) {
+  .cv-stack img { filter: invert(1); }
+}
+.cv-stack-more {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  max-width: 52ch;
+}
+.cv-stack + .cv-stack-more { margin-top: 0.85rem; }
+
 @media (max-width: 600px) {
   .cv-item { gap: 0.85rem; }
 }
@@ -887,8 +923,12 @@ body.fit-screen .site-footer {
 
   /* Never split one entry across two pages, and keep a group's title
      with the entries below it. */
-  .cv-item { break-inside: avoid; }
+  .cv-item, .cv-stack-group { break-inside: avoid; }
   .cv-group-title { break-after: avoid; }
+  /* Paper is always white: keep the marks black even when the
+     printing device is in dark mode. */
+  .cv-stack img { filter: none !important; }
+  .cv-stack-group + .cv-stack-group { margin-top: 4mm; }
 
   /* Links read as plain text on paper; the one external link prints its
      address after the label so the document stays self-contained. */
